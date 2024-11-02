@@ -43,6 +43,7 @@ RUN apt-get update -qq && \
     g++ \
     make \
     wget \
+    unzip \
     readline-common \
     postgresql-client \
     zlib1g-dev \
@@ -64,14 +65,13 @@ COPY . .
 
 # # Install bundler and application gems
 RUN  ~/.rbenv/shims/gem install bundler -v $BUNDLER_VERSION && \
-    /bundle/bin/bundle install --binstubs --verbose --retry=3 --without='development test'
+    bundle install --binstubs --verbose --retry=3 --without='development test' && \
+    bundle exec rake assets:precompile
 # /bundle/bin/bundle config build.libv8 --with-cxx=clang++ && /bundle/bin/bundle update nokogiri && /bundle/bin/bundle install --binstubs --verbose --retry=3 --without='development test'
 
 
 #     # a writable tmp dir even in Lambda situation
 #     RUN ln -s /tmp /app/tmp
-
-RUN /bundle/bin/bundle exec rake assets:precompile
 
 EXPOSE 3000
 
