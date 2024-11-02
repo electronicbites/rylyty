@@ -45,6 +45,7 @@ RUN apt-get update -qq && \
     wget \
     readline-common \
     postgresql-client \
+    zlib1g-dev \
     git && \
     curl -sL https://deb.nodesource.com/setup_14.x | bash - && \
     apt-get install -y --force-yes  nodejs && \
@@ -62,15 +63,16 @@ WORKDIR $APP_HOME
 COPY . .
 
 # # Install bundler and application gems
-RUN ~/.rbenv/shims/gem install bundler -v $BUNDLER_VERSION # && \
-    # /bundle/bin/bundle update nokogiri rails && /bundle/bin/bundle install --binstubs --verbose --retry=3 --without='development test'
+RUN  ~/.rbenv/shims/gem install bundler -v $BUNDLER_VERSION && \
+    /bundle/bin/bundle install --binstubs --verbose --retry=3 --without='development test'
+# /bundle/bin/bundle config build.libv8 --with-cxx=clang++ && /bundle/bin/bundle update nokogiri && /bundle/bin/bundle install --binstubs --verbose --retry=3 --without='development test'
 
 
-    #     # a writable tmp dir even in Lambda situation
-    #     RUN ln -s /tmp /app/tmp
+#     # a writable tmp dir even in Lambda situation
+#     RUN ln -s /tmp /app/tmp
 
-    # RUN /bundle/bin/bundle exec rake assets:precompile
+RUN /bundle/bin/bundle exec rake assets:precompile
 
-    # EXPOSE 3000
+EXPOSE 3000
 
-    # CMD ["bundle","exec","puma","-C","config/puma.rb"]
+# CMD ["bundle","exec","puma","-C","config/puma.rb"]
