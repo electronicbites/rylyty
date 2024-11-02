@@ -1,0 +1,49 @@
+$brown: #49362b
+$light-brown: #a09088
+$main-background: #faf9f4
+
+
+$yellow: #ebb616
+$orange: #ea542a
+
+$link-color: #d13d1b
+$link-hover-color: #e65420
+$link-active-color: #d13d1b
+
+@import "bootstrap"
+@import "bootstrap-responsive"
+
+html, body
+  height: 100%
+
+body
+  background: $main-background
+
+  .wrap
+    min-height: 100%
+
+    > div
+      position: relative
+      overflow: hidden
+
+  // fix for Opera (Sticky footer)
+  &:before
+    content: ""
+    float: left
+    height: 100%
+    margin-top: -32767px
+    width: 0
+
+body, p, label, input, select, textarea, button,
+.input-prepend .add-on, .input-append .add-on
+  font-family: 'PT Sans', sans-serif
+
+h1, h2, h3, h4, h5, h6
+  color: $brown
+
+h1
+  font-size: 40px
+  margin-bottom: 14px
+
+h2, h3
+  margin-bottom: .5em

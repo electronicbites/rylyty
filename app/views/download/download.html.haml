@@ -1,0 +1,19 @@
+%div#spacer
+%p.success
+  ✓
+  = t('invitation.conformation_download_headline')
+=#*************************************************************************************************************
+%p
+  = t('invitation.conformation_download_response')
+
+%div#spacer
+%p.active
+  Wenn der Download nicht startet,
+  = link_to "klicke einfach hier", @download_url
+
+%script
+  $(document).ready(function() {
+  if (window._gaq) window._gaq.push(['_trackEvent', 'Invitation Signup', 'confirmed', 'Invitation Signup Manual IPA Download']);
+  window.setTimeout(function(){document.location.href='#{raw @download_url}'}, 25)
+  });
+=#*************************************************************************************************************

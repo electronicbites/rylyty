@@ -1,0 +1,99 @@
+%p
+- unless  @task.new_record? 
+  %b
+    =link_to "zurück zu: #{@task.game.title}", "#{edit_cockpit_game_editor_path(id: @game.id)}"
+- if @task.errors.any?
+  .row.rowpad
+    .span11.offset1
+      #error_explanation
+        %h2
+          = "#{pluralize(@task.errors.count, "error")} prohibited this task from being saved:"
+        %ul
+          - @task.errors.full_messages.each do |msg|
+            %li
+              = msg
+
+.row.rowpad
+  .span11.offset1
+    = form_for(@task, url: cockpit_game_editor_path(id: @game.id), multipart: true) do |f|
+      .span5
+        %input{:name => "_method", :type => "hidden", :value => "put"}
+        
+        - unless  @task.id.nil?
+          %input{:name => "task_id", :type => "hidden", :value => @task.id}
+          %input#task_type{:name => "task_type", :type => "hidden", :value => "#{@task.type.tableize.singularize}"}
+        
+        %input{:name => "tasks", :type => "hidden", :value => "true"}
+        
+        %div{:style => "float:left; height: 100%;"}
+          = f.label :title, t(:title)
+          = f.text_field :title, class: "span5", placeholder: "max. 40 Zeichen"
+          = f.label :short_descriptiont, t(:short_description)
+          = f.text_field :short_description, class: "span5"
+          = f.label :description, t(:description)
+          = f.text_area :description, rows: 10, class: "span5"
+          = f.label :image, t(:image)
+          - if @task.icon.present?
+            = image_tag @task.icon.url(:thumb_hi)
+          = f.file_field :icon
+      
+      .span5
+        = label_tag :type, t(:type)
+        - if @task.id.nil?
+          = select_tag(:task_type, options_for_select([['photo', 'photo_task'],['question', 'question_task'],['multiple choice', 'multiple_choice_task']], params[:task_type]), onChange: "gameEditor.setupTaskTypeInputs()".html_safe, class: 'span5')
+        - else
+          %b= @task.type
+        #time_limit.field
+          = label_tag(:time_limit, t(:time_limit))
+          = f.text_field :timeout_secs, (@task.id.nil? || @task.timeout_secs.nil? ? { placeholder: '00:00:00' } : { value: secs_to_duration(@task.timeout_secs)}).merge(class: 'span5')
+        #task_points.field
+          = label_tag(:points, t(:points))
+          = f.text_field :points, (@task.id.nil? || @task.points.nil? ? { placeholder: '0' } : { value: @task.points}).merge(class: 'span5')
+        - if @task.is_a?(MultipleChoiceTask)
+          #mc_minimum_score.field
+            = label_tag(:minimum_score, t(:minimum_score))
+            = f.text_field :minimum_score, (@task.id.nil? ? { value: 0 } : {}).merge(size: 20, class: 'span5')
+          #mc_questions
+            = render partial: 'admin/game_editor/multiple_choice_task_fields'
+          = link_to t(:add_question), 'javascript:gameEditor.addTaskTypeInput(\'q\');', id: "add_q", class: 'btn btn-primary'
+        - else
+          #task_basic_question.field
+            = label_tag(:question, t(:question))
+            = f.text_area :question, { rows: 10, class: 'span5' }
+
+      .row
+        %div{class: 'span2 offset8', style: 'margin-top: 20px'}
+          = submit_tag (@task.nil? || @task.id.nil?) ? t(:save) : t(:update), id: 'edit_submit', class: 'btn btn-inverse btn-large span2'
+      - # save form for templates outside form cause template-inputs should not be sent when submitting
+      - @template_f = f
+    /
+      \------------- templates -------------
+    #task_basic_question_template{:style => "display:none;"}
+      #:task_basic_question.field
+        = label_tag(:question, t(:question))
+        = @template_f.text_area :question, { rows: 10, class: 'span5' }
+    #multiple_choice_task_inputs_template_minscore{:style => "display:none;"}
+      #:mc_minimum_score.field
+        = label_tag(:minimum_score, t(:minimum_score))
+        = @template_f.text_field :minimum_score, { value: 0, size: 20, class: 'span5' }
+      #:mc_questions
+      = link_to t(:add_question), 'javascript:gameEditor.addTaskTypeInput(\'q\');', id: ":add_q", class: 'btn btn-primary'
+    #multiple_choice_task_inputs_template_q{:style => "display:none;"}
+      %hr
+      .mc_question
+        = label_tag(:question, "#{t(:question)} :index_+_1")
+        = text_field_tag "multiple_choice_task[questions][:index][question]", '', size: 20, class: 'span5'
+        = link_to t(:delete), cockpit_game_editor_path(id: @game.id, tasks: true, task_id: @task.id, _action: :del_mc_q).concat('&q_idx=:parent_id'), 'data-method' => :put, remote: true, id: "del_q_:index", class: 'btn btn-danger'
+      .field{id: "points_field_div_:index"}
+        = label_tag(:points, t(:points))
+        = text_field_tag "multiple_choice_task[questions][:index][points]", '0', size: 20, class: 'span2'
+      %div{style: "padding-top: 20px"}
+        = link_to t(:add_answer), 'javascript:gameEditor.addTaskTypeInput(\'a\', :parent_id);', id: "add_a_to_q_:parent_id", class: "btn btn-primary"
+      %br
+    #multiple_choice_task_inputs_template_a{:style => "display:none;"}
+      #answer_field_div_:parent_id_:index.field
+        %label Antwort
+        = check_box_tag "multiple_choice_task[questions][:parent_id][option][:index][check]", 1
+        = text_field_tag "multiple_choice_task[questions][:parent_id][option][:index][answer]", '', size: 20, class: 'answer_input_width'
+        = link_to t(:delete), cockpit_game_editor_path(id: @game.id, tasks: true, task_id: @task.id, _action: :del_mc_a).concat('&q_idx=:parent_id&a_idx=:index'), 'data-method' => :put, remote: true, id: "del_q_:parent_id_a_:index", class: "btn btn-danger", style: 'margin-bottom: 9px'
+      

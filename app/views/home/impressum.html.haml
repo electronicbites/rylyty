@@ -1,0 +1,38 @@
+.block
+  %h1
+    = image_tag "signet-rylyty.png", :id => "signet-rylyty"
+  %h2 Impressum
+  %p
+    rylyty ist ein Projekt der
+  %p
+    Oliver Skopec Investment & Consulting UG
+    %br/
+    Ebelingstr. 14a
+    %br/
+    10249 Berlin
+  %p
+    E-Mail:
+    %a#mailto
+    %br/
+    Telefon: +49 (0) 30 6920248-50
+  %p
+    Geschäftsführung: Oliver Skopec
+    %br/
+    Handelsregister: AG Charlottenburg HRB 119914 B
+    %br/
+    Umsatzsteuer-Identifikationsnummer (UStID): DE815106085
+:javascript
+  $(document).ready( function() {
+    var addr3 = "ty.com";
+    var addr2 = "o@ryly";
+    var addr1 = "inf";
+    var addr0 = "mailto:";
+    var addr = addr0 + addr1 + addr2 + addr3;
+    var addrvis = addr1 + addr2 + addr3;
+
+    var Knoten = document.getElementById("mailto").firstChild;
+    var mailadd = document.createTextNode(addrvis);
+    document.getElementById("mailto").appendChild(mailadd);
+    document.getElementById("mailto").setAttribute("href", addr );
+  } );
+

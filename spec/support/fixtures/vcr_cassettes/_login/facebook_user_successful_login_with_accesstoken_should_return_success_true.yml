@@ -1,0 +1,159 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://graph.facebook.com/oauth/access_token
+    body:
+      encoding: US-ASCII
+      string: client_id=123456789356813&client_secret=huh2e6m12345678999e123f3dxw123s1&type=client_cred
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: 
+    headers:
+      access-control-allow-origin:
+      - ! '*'
+      cache-control:
+      - private, no-cache, no-store, must-revalidate
+      content-type:
+      - text/plain; charset=UTF-8
+      expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      pragma:
+      - no-cache
+      x-fb-rev:
+      - '691575'
+      x-fb-debug:
+      - Zvz71Xu3OFNMzhJhNWpwp5XivLtj6idrbpxQXdhQRko=
+      date:
+      - Tue, 11 Dec 2012 11:53:06 GMT
+      connection:
+      - close
+      content-length:
+      - '56'
+    body:
+      encoding: US-ASCII
+      string: access_token=123456789356813|dEIMGRXEfjQdND_Cy8MK5ONrURA
+    http_version: 
+  recorded_at: Tue, 11 Dec 2012 11:53:06 GMT
+- request:
+    method: post
+    uri: https://graph.facebook.com/123456789356813/accounts/test-users
+    body:
+      encoding: US-ASCII
+      string: installed=true&permissions=offline_access%2Cread_stream&access_token=123456789356813%7CdEIMGRXEfjQdND_Cy8MK5ONrURA
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: 
+    headers:
+      access-control-allow-origin:
+      - ! '*'
+      cache-control:
+      - private, no-cache, no-store, must-revalidate
+      content-type:
+      - text/javascript; charset=UTF-8
+      expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      pragma:
+      - no-cache
+      x-fb-rev:
+      - '691575'
+      x-fb-debug:
+      - M7YscsHwbv5JNuYhGs+XSR58ipnPCuPacJxCio3DUok=
+      date:
+      - Tue, 11 Dec 2012 11:53:16 GMT
+      connection:
+      - close
+      content-length:
+      - '359'
+    body:
+      encoding: US-ASCII
+      string: ! '{"id":"100004847042408","access_token":"AAAFICNFu7Y0BACwNaVtNJ9xZAz9ZA6U6n0VJ7pyfaZAPXy46O96SgzE4lXeNkaZA1Ne58tNbGQZCTqZCo89MRhfVBHbtVYmZAE4LoVHOmpXtEjiQ58ZAW2ny","login_url":"https:\/\/www.facebook.com\/platform\/test_account_login.php?user_id=100004847042408&n=Slmn8rX99qxyabn","email":"bonuund_liangstein_1355226786\u0040tfbnw.net","password":"1628490954"}'
+    http_version: 
+  recorded_at: Tue, 11 Dec 2012 11:53:16 GMT
+- request:
+    method: get
+    uri: https://graph.facebook.com/me?access_token=AAAFICNFu7Y0BACwNaVtNJ9xZAz9ZA6U6n0VJ7pyfaZAPXy46O96SgzE4lXeNkaZA1Ne58tNbGQZCTqZCo89MRhfVBHbtVYmZAE4LoVHOmpXtEjiQ58ZAW2ny
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: 
+    headers:
+      access-control-allow-origin:
+      - ! '*'
+      cache-control:
+      - private, no-cache, no-store, must-revalidate
+      content-type:
+      - text/javascript; charset=UTF-8
+      etag:
+      - ! '"a79e2060fcbfe4fd91f32440f62007967d12af87"'
+      expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      pragma:
+      - no-cache
+      x-fb-rev:
+      - '691575'
+      x-fb-debug:
+      - TL33qzto/+hEX064vMKaoznv4gzm4t9+Fx7Uvbq9jVs=
+      date:
+      - Tue, 11 Dec 2012 11:53:16 GMT
+      connection:
+      - close
+      content-length:
+      - '251'
+    body:
+      encoding: US-ASCII
+      string: ! '{"id":"100004847042408","name":"Harry Amdhdgjdbdjh Liangstein","first_name":"Harry","middle_name":"Amdhdgjdbdjh","last_name":"Liangstein","link":"http:\/\/www.facebook.com\/profile.php?id=100004847042408","gender":"male","timezone":0,"locale":"de_DE"}'
+    http_version: 
+  recorded_at: Tue, 11 Dec 2012 11:53:16 GMT
+- request:
+    method: post
+    uri: https://graph.facebook.com/100004847042408
+    body:
+      encoding: US-ASCII
+      string: access_token=360677687356813%7CdEIMGRXEfjQdND_Cy8MK5ONrURA&method=delete
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: 
+    headers:
+      access-control-allow-origin:
+      - ! '*'
+      cache-control:
+      - private, no-cache, no-store, must-revalidate
+      content-type:
+      - text/javascript; charset=UTF-8
+      expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      pragma:
+      - no-cache
+      x-fb-rev:
+      - '691575'
+      x-fb-debug:
+      - zh2vwJ8xVx0t3pL/s2KgQvkRG1pKqE3Tj4/KGjGVLlc=
+      date:
+      - Tue, 11 Dec 2012 11:53:21 GMT
+      connection:
+      - close
+      content-length:
+      - '4'
+    body:
+      encoding: US-ASCII
+      string: 'true'
+    http_version: 
+  recorded_at: Tue, 11 Dec 2012 11:53:22 GMT
+recorded_with: VCR 2.3.0

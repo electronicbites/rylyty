@@ -1,0 +1,213 @@
+de:
+  support:
+    array:
+      words_connector: ', '
+      two_words_connector: ' und '
+      last_word_connector: ' und '
+
+  beta_registration_index_a_or_b_1: |
+    Du, deine Freunde und das erste onlineverknüpfte Draußenspiel.
+  beta_registration_index_a_or_b_2: |
+    RYLYTY ist eine Plattform für Reality-Games. Wir backen keine kleinen Brötchen. Wir retten die Welt.
+  beta_registration_index_a_or_b_3: |
+    Spiel das Spiel – mit deinen Freunden und der echten Welt.
+  beta_registration_confirmation_response: Sobald es losgeht, sagen wir dir Bescheid. Kannst gerne solange noch ein paar Freunde dazu holen!
+    Ansonsten schau mal auf unserem Blog, unserer Facebook-Seite oder unserem Twitter-Account vorbei!
+  newsletter_abo_confirmation_response: Sobald es losgeht, sagen wir dir Bescheid. Kannst gerne solange noch ein paar Freunde dazu holen!
+    Ansonsten schau mal auf unserem Blog, unserer Facebook-Seite oder unserem Twitter-Account vorbei!
+
+  invitation:
+    conformation_headline: Willkommen an Bord!
+    conformation_response: Die App wird installiert...
+    conformation_response_no_idevice: Leider hast du gerade weder iPhone noch iPod in der Hand. Und nur damit geht’s los.
+    mail_sent: Mail wird verschickt...
+    conformation_download_headline: Willkommen an Bord!
+    conformation_download_response: Gleich startet der Download...
+
+  access_limit: Zugangsbeschränkung
+  add_answer: Antwort hinzufügen
+  add_category: Kategorie hinzufügen
+  add_question: Frage hinzufügen
+  add_task: Neue Aufgabe
+  category: Kategorie
+  costs: Kosten
+  delete: Löschen
+  description: Beschreibung
+  edit: Bearbeiten
+  game_title: Titel
+  image: Bild
+  icon: Icon
+  minimum_age: Altersbegrenzung
+  minimum_score: Minimale Punktanzahl
+  mission: Mission
+  points: Punkte
+  question: Frage
+  reward: Belohnung
+  save: Sichern!
+  short_description: Kurzbeschreibung
+  suggestion: Vorschlag
+  time_limit: Zeitlimit
+  title: Titel
+  type: Typ
+  update: Ändern!
+  back_to_list: Zurück zur Spiele-Übersicht
+
+  mail:
+    newsletter:
+      abo_confirmation_subject: Deine Anmeldung für den rylyty-Newsletter
+    password_reset:
+      body_html: |
+        <p>Hallo %{email}!</p>
+        <p>Jemand hat einen Link zu ändern Sie Ihr Kennwort angefordert wird, und Sie können dies über den Link unten tun.</p>
+        <p><a href="%{reset_password_link}">Neues Passwort anfordern</a></p>
+        <p>Wenn Sie nicht angefordert haben diese, ignorieren Sie diese E-Mail.</p>
+        <p>Ihr Passwort wird sich nicht ändern, bis Sie auf den Link zugreifen und eine neue erstellen.</p>
+
+  time:
+    formats:
+      long: Zeit
+  date:
+    formats:
+      long: Datum
+
+  feeds:
+    task_timed_out: |
+      Zu spät, deine Zeit für %{title} ist um!
+    game_invite_received: |
+      %{username} fragt, ob du bei %{title} mitmachst.
+    task_liked: |
+      %{username} findet deinen Beweis zu %{title} gut.
+    invited_accepted: |
+      %{username} ist jetzt auch bei rylyty – durch deine Einladung! Dafür kassierst du %{credits} Credits!
+    facebook_friend_signed_up: |
+      %{username} ist jetzt auch bei rylyty!
+    task_started: |
+      %{username} hat die Challenge %{title} gestartet. 
+      task_completed
+    task_completed: |
+      %{username} hat die Challenge %{title} bestanden.
+    game_completed: |
+      %{username} hat %{title} durchgespielt und das hier bekommen: %{points}
+    friends_liked_your_answer: |
+      %{username} findet deinen Beweis für %{title} gut.
+
+  users:
+    facebook_id_saved: |
+      facebook id gespeichert
+    fb_friends_found: |
+      facebook freunde gefunden
+    no_fb_friends_found: |
+      wir haben keinen deiner fb-freunde auf rylyty gefunden. lade sie doch einfache ein.
+    user_name_available: |
+      Dieser Benutzername ist noch vefügbar.
+    errors:
+      buying_game:
+        intro: |
+          Dieses Spiel kann nicht gekauft werden.
+
+        # keep newline above for output!
+        insufficient_credits: |-
+          %{need_credits} Credits sind nötig, um dieses Spiel zu starten.
+        insufficient_point: |-
+          %{need_points} Punkte sind nötig, um dieses Spiel zu starten.
+        insufficient_age: |-
+          Dieses Spiel hat ein Mindestalter von %{need_age} Jahren. Sorry.
+        insufficient_badges: |-
+            Um dieses Spiel zu starten, brauchst du diesen Badge: %{need_badges}“.
+      user_not_found: |
+        Der Benutzer wurde nicht gefunden
+      password_reset:
+        invalid_email: |
+          Ohne deine E-Mail- Adresse geht hier leider gar nichts.
+
+  user_games:
+    visibility_settings_sucessfully_updated: |
+      Feed privacy wurde geändert
+    visibility_must_set_to_friends: |
+      Sorry, du kannst deine Feeds nicht öffentlich sichtbar machen.
+    already_bought: |
+      Das hast du schon mal gekauft. 
+
+  user_tasks:
+    task_already_answered: |- 
+      Diese Challenge hast du schon bestanden.
+    proof_not_liked: |-
+      Noch findet niemand den Beweis gut.
+    proof_not_found: |-
+      Der Beweis wurde nicht gefunden.
+    user_not_found: |-
+      Der User wurde nicht gefunden!
+    not_valid_for_like: |-
+      Diesen Beweis kann man noch nicht gut finden.
+    already_liked: |-
+      Das hast du schon mal gemacht. 
+    buy_game_first: |-
+      Du mußt das Spiel kaufen, bevor du den Task starten kannst.
+    cannot_play: |-
+      Dieses Spiel kannst du leider noch nicht spielen
+
+
+
+  invitations:
+    user_already_invited_by_you: |
+      Hast du schon eingeladen. Doppelt geht nicht.
+    user_cannot_be_invited: |
+      Keine Ahnung, wer das ist. Einladen geht hier nicht.
+    missing_invitee: |
+      Und wer ist der oder die Glückliche?
+
+  login:
+    errors:
+      missing_login_parameter: |
+        du musst Benutzername und Password angeben
+      error_with_login_or_password: |
+        da ist ein fehler aufgetreten beim Login, falscher name oder falschs passwort?
+
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes: 
+            username:
+              blank: Dein Benutzername fehlt noch.
+              too_short: Dein Benutzername ist zu kurz.
+              taken:  Dieser Benutzername ist schon vergeben.
+              invalid: | 
+                Mmh, das ist zu kreativ. Lass mal die Sonderzeichen weg.
+            email:
+              invalid: Deine E-Mail-Adresse ist ungültig.
+              blank: Deine E-Mail-Adresse fehlt noch.
+              unique: Diese E-Mail-Adresse ist schon vergeben.
+            password:
+              too_short: Dein Passwort muss aus mind. 6 Zeichen bestehen.
+              blank: Dein Passwort fehlt noch.
+            tos:
+              accepted: Du musst da noch ein Häkchen setzen.
+            credits:
+              blank: Das darf aber nicht passieren. Alle deine Kredits sind weg!
+        game:
+          attributes:
+            title:
+              blank: Da fehlt noch der Titel.
+            short_description: 
+              blank: Da fehlt noch ein Teaser.
+            description:
+              blank: Ohne Beschreibung geht das irgendwie nicht.
+            costs:
+              blank: Und was soll das kosten?
+        user_game:
+          attributes:
+            feed_visibility: Stell mal die Sichtbarkeit auf „Freunde“.
+        task:
+          attributes:
+            title:
+              blank: Da fehlt noch der Titel.
+            type:
+              blank: Da fehlt noch was.
+        user_task:
+          attributes:
+            task:
+              invalid: Da fehlt noch was.
+            game:
+              invalid : Da fehlt noch was.
+

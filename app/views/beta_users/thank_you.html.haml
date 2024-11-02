@@ -1,0 +1,27 @@
+.block
+  %h1
+    = image_tag "signet-rylyty.png", :id => "signet-rylyty"
+  %hr
+  %hr
+
+.block
+  
+  %h1#register Sei von Anfang an dabei
+  %h2 Melde dich jetzt für den Betatest an!
+  =#*************************************************************************************************************
+  #beta-form
+    = form_for :beta_user, url: beta_users_path, remote: true, html: { id: 'new_beta_user' }  do |f|
+
+      #email_field_wrapper
+        = f.email_field :email, placeholder: "Deine E-Mail-Adresse", disabled: true
+        = button_tag "Ich bin dabei", id: "btn-dabei", class: "btn sent", type: "submit", disabled: true
+      #beta_user_email_height_wrapper
+        #beta_user_email_confirm
+          %p
+            Das hat geklappt. Du bekommst jetzt eine E-Mail mit einem Aktivierungslink. So gehen wir sicher, dass die E-Mail-Adresse auch wirklich deine ist.
+          %p.bold
+            Klicke einfach auf den Link in der E-Mail, um deine Registrierung abzuschliessen.
+  =#*************************************************************************************************************
+  %hr
+
+= render '/shared/social_buttons'

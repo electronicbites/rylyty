@@ -1,0 +1,227 @@
+<html>
+<head>
+<title>rylyty Punktsystem</title>
+	<script type="text/javascript">
+	var taskcount = 1;
+	
+	/*
+	
+	einen Punkt pro Task
+	geschätzte Zeit 
+	Wie schwer sind Hilfsmittel zu besorgen
+	Welcher Beweis ist zu erbringen
+	
+	wenn es mehrere tasks gibt -> einen zusatzpunkt für jeden task
+	
+	timertask -> punkteabzug für langsamkeit
+	
+	und weiters werden punkte noch vergeben
+	
+	
+	photo == 50 / multiple choice 20 / 
+	"< 60 min -> 6
+	1h - 5h -> 12
+	5h - 12h ->18
+	12h - 72h -> 24
+	> 72 h -> 32"
+	0 / 16 / 32 / 48 / 64
+	timer == 10
+	
+	*/
+	
+	var time = {'less1': '6','1to5':'12','6to12': '18','13to72':'24','more72': '32'};
+	var tool = {'no': '0','simple':'16','ok': '32','dif':'48','ex_dif': '64'};
+	var proof = {'photo': '55','mc':'15','answer': '30'};
+	var timer = {'yes': '10','no':'0'};
+	
+	var values = { 'time': time, 'tool': tool, 'proof': proof, 'timer': timer };
+	
+	function calculate(){
+		
+		var calculate_values = new Array();
+		for ( i = 0; i < taskcount; ++i ){
+			var el = document.getElementById("task_"+(i+1));
+			
+			var game_values = new Array();
+			
+/* get all select forms and the actual selected values */
+			var selects = el.getElementsByTagName('select');
+			for (index = 0; index < selects.length; ++index) {
+				
+				//alert( selects[index].id+": "+selects[index].options[selects[index].selectedIndex].value );
+				
+				var val = selects[index].options[selects[index].selectedIndex].value;
+				//game_values[selects[index].id] = values[selects[index].id][val];
+				game_values[index] = values[selects[index].id][val];
+	
+			}
+			var sum = 0;
+			for (j = 0; j < game_values.length; ++j) {
+				sum = sum + parseInt(game_values[j]);
+			}
+			calculate_values[i] = sum;
+		}
+		var res_el = document.getElementById("result");
+
+/* if there are more tasks than one there is an extra bonus for finishing the game */
+		var bonus = 0;
+		if ( taskcount > 1 ){
+			var total = 0;
+			for (j = 0; j < calculate_values.length; ++j) {
+				total += calculate_values[j];
+			}
+			bonus = Math.floor(total/100*10);
+		}
+
+/* style the result in HTML tags */
+		var s = "<b>Resultat:</b><br>";
+		var total = 0;
+		for (j = 0; j < calculate_values.length; ++j) {
+			s += "Aufgabe <i>"+document.getElementById("name").value+"</i>: <b>"+calculate_values[j]+"</b><br>";
+			total += calculate_values[j];
+		}
+		if ( taskcount > 1 ){
+			s += "Spielbonus: <b>"+bonus+"</b><br>";
+		}
+		
+		s += "<br>SUMME: <b>"+(total+bonus)+"<b><br>";
+		
+		res_el.innerHTML = s;
+	}
+	
+	
+
+	function addTask(){
+		var newTask = document.createElement("div");
+		
+		var lastTask = document.getElementById("task_"+taskcount);
+
+		newTask.innerHTML = lastTask.innerHTML;
+		
+		taskcount++;
+		newTask.id = "task_"+taskcount;
+		newTask.className = "task";
+		
+		var refNode = document.getElementById("calculate");
+		refNode.parentNode.insertBefore(newTask, refNode);
+		
+	}
+	</script>
+	<style>
+	body{
+		font-family:Arial;
+		border:solid 4px #CD6722;
+		margin-top:10px;
+		margin-left:10px;
+		padding:20px;
+	}
+	#content{
+		width:900px;
+	}
+	.desc{
+		font-size:9pt;
+		color:#C4C4C4;
+	}
+	.text{
+		font-size:11pt;
+		color:#999999;
+	}
+	.text b{
+		color:black;
+	}
+	.text i{
+		color:#4A1B62;
+	}
+	#cell{
+		width:120px;
+		height:15px;
+		float:left;
+		margin-right:5px;
+	}
+	#header{
+		float:bottom;
+		width:100%;
+		height:22px;
+	}
+	.task{
+//		border:solid 1px red;
+		float:bottom;
+		width:100%;
+		height:22px;
+	}
+	#result{
+//		border:solid 1px red;
+		float:bottom;
+		width:100%;
+		height:22px;
+		margin-top:20px;
+	}
+	#calculate{
+		width:100%;
+		margin-top:20px;
+		text-align:right;
+	}
+	.calculate_button{
+		width:200px;
+		height:30px;
+		border:solid 1px #4A1B62;
+		background-color:#A558BE;
+		font:11pt Arial bold;
+		color: #4A1B62;
+	}
+	</style>
+</head>
+<body>
+	<form>
+<div id="content">
+<div id="header">
+	<div id="cell" class="desc"></div>
+	<div id="cell" class="desc">Name </div>
+	<div id="cell" class="desc">Zeit (h)</div>
+	<div id="cell" class="desc">Hilfsmittel besorgen</div>
+	<div id="cell" class="desc">Beweis</div>
+</div>
+<div id="task_1" class="task">
+	<div id="cell" class="text">Aufgabe: </div>
+	<div id="cell" class="text"><input type="text" value="" id="name"></div>
+	<div id="cell" class="text">
+		<select id="time">
+		<option value="less1" selected> < 1h</option>
+		<option value="1to5">1h - 5h</option>
+		<option value="6to12">6h - 12h</option>
+		<option value="13to72">13h - 72h</option>
+		<option value="more72"> mehr als 72h</option>
+	</select>
+	</div>
+	<div id="cell" class="text">
+		<select id="tool">
+		<option value="no" selected>keine</option>
+		<option value="simple">einfach</option>
+		<option value="ok">mittel</option>
+		<option value="dif">schwer</option>
+		<option value="ex_dif">sehr schwer</option>
+	</select>
+	</div>
+	<div id="cell" class="text">
+		<select id="proof">
+		<option value="photo" selected>Fotoupload</option>
+		<option value="mc" >Multiple choice</option>
+		<option value="answer" >Antwort</option>
+	</select></div>
+	<div id="cell" class="text">
+		<select id="timer">
+		<option value="yes" >yes</option>
+		<option value="no" selected>no</option>
+	</select></div>
+	<div id="cell" class="text"><input type="button" id="new_task" value="+ Aufgabe" onClick="addTask();"></div>
+</div>
+<div id="calculate" class="task">
+	<input type="button" id="calc_button" value="Berechnen" onClick="calculate();" class="calculate_button">
+</div>
+
+<div id="result" class="text">
+	
+	</div>
+	</form>
+</body>
+</html>

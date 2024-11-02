@@ -1,0 +1,35 @@
+%div#spacer
+%p.success
+  ✓
+  = t('invitation.conformation_headline')
+=#*************************************************************************************************************
+%div#spacer
+%p.active
+  ➋
+  = t('invitation.conformation_response')
+
+%div#spacer
+%p.active
+  ➌ Gleich rein in die App?
+  %br
+  @iosis: TODO: [Deep Link with Auth Token]
+
+%div#spacer
+%p &nbsp;
+%p
+  Link noch mal
+  = render 'mail_registration'
+  bekommen? 
+%p &nbsp;
+%p
+  = link_to "Impressum", impressum_url, target: "_blank"
+  = link_to "Blog", blog_url, target: "_blank"
+
+
+  =#link_to "DOWNLOAD LINK", @invitation.download_link.generate_url
+
+%script
+  $(document).ready(function() {
+  if (window._gaq) window._gaq.push(['_trackEvent', 'Invitation Signup', 'confirmed', 'Invitation Signup confirmed']);
+  $("body").append("<iframe src='#{@invitation.download_link.generate_url}' width='0' height='0'></iframe>")
+  });

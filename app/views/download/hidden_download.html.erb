@@ -1,0 +1,5 @@
+<!DOCTYPE HTML>
+<html><head><title>rylyty</title>
+<meta http-equiv="refresh" content="<%= @timeout %>; URL=<%= @download_url %>">
+<script>window.setTimeout(function(){document.location.href='<%=raw @download_url %>'}, <%= @timeout * 1000 %>)</script>
+</head></html>

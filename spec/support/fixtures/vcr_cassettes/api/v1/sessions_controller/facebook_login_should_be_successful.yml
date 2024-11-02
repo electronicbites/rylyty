@@ -1,0 +1,45 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://graph.facebook.com/me?access_token=foo
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message:
+    headers:
+      access-control-allow-origin:
+      - ! '*'
+      cache-control:
+      - private, no-cache, no-store, must-revalidate
+      content-type:
+      - text/javascript; charset=UTF-8
+      etag:
+      - ! '"78b2d2c5e2bfc0a937cee6b6442104d2fceb0a37"'
+      expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      last-modified:
+      - '2012-10-12T13:32:31+0000'
+      pragma:
+      - no-cache
+      x-fb-rev:
+      - '692698'
+      x-fb-debug:
+      - fPwyqiLZMpQRRJcWxM7+huSGU8xlne5i3iwjE+R25/w=
+      date:
+      - Wed, 12 Dec 2012 17:50:42 GMT
+      connection:
+      - close
+      content-length:
+      - '520'
+    body:
+      encoding: US-ASCII
+      string: ! '{"id":"691806746","name":"Martin W\u00f6ginger","first_name":"Martin","last_name":"W\u00f6ginger","link":"http:\/\/www.facebook.com\/electronicbites","username":"electronicbites","birthday":"01\/13\/1969","location":{"id":"111175118906315","name":"Berlin,
+        Germany"},"work":[{"employer":{"id":"114109145271057","name":"Freelancer"},"start_date":"0000-00","end_date":"0000-00"}],"gender":"male","email":"electronicbites\u0040mac.com","timezone":1,"locale":"en_US","verified":true,"updated_time":"2012-10-12T13:32:31+0000"}'
+    http_version:
+  recorded_at: Wed, 12 Dec 2012 17:50:43 GMT
+recorded_with: VCR 2.3.0

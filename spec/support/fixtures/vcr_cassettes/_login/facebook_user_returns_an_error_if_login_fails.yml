@@ -1,0 +1,42 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://graph.facebook.com/me?access_token=some_wrong_testtoken_for_fb
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 400
+      message: 
+    headers:
+      access-control-allow-origin:
+      - ! '*'
+      cache-control:
+      - no-store
+      content-type:
+      - text/javascript; charset=UTF-8
+      expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      pragma:
+      - no-cache
+      www-authenticate:
+      - OAuth "Facebook Platform" "invalid_token" "Invalid OAuth access token."
+      x-fb-rev:
+      - '691575'
+      x-fb-debug:
+      - QuUFOlQF4q0PR5nalbKpnCVcbfvgK2bbV8bSTH9CU6c=
+      date:
+      - Tue, 11 Dec 2012 10:07:29 GMT
+      connection:
+      - close
+      content-length:
+      - '86'
+    body:
+      encoding: US-ASCII
+      string: ! '{"error":{"message":"Invalid OAuth access token.","type":"OAuthException","code":190}}'
+    http_version: 
+  recorded_at: Tue, 11 Dec 2012 10:07:29 GMT
+recorded_with: VCR 2.3.0

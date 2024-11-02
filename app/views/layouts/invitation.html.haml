@@ -1,0 +1,25 @@
+!!!
+
+%html{lang: 'de'}
+  %head
+    = render partial: '/layouts/google_analytics'
+    %noscript
+      Diese Seite wurde mit JavaScript optimiert, bitte aktivieren Sie Javascript
+    %meta{charset: 'utf-8'}
+    %title= 'Deine App für neue Spiele – rylyty'
+    %meta{name: 'description', content: 'Spiel mit deinen Freunden und der ganzen Community neue Spiele über die rylyty-App. Nicht nur am Computer, sondern draußen. rylyty – die neue Generation von Reality Games.'}
+    %meta{name: 'keywords', content: 'Game,Spiel,Reality,App,Freunde,draussen,draußen'}
+    %meta{name: 'viewport', content: 'width=device-width; initial-scale=1.0; maximum-scale=1.0;'}
+
+    -# Include google webfont
+    <link href='http://fonts.googleapis.com/css?family=Signika&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    -# Include Stylesheets
+    -#
+    = stylesheet_link_tag 'invitation'
+    = javascript_include_tag 'application'
+
+  %body
+    = image_tag "rylyty_logo.jpg", :id => "rylyty_logo"
+
+    = yield
+

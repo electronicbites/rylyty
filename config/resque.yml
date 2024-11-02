@@ -1,0 +1,4 @@
+development: 
+  redis_url: redis://localhost:6379/
+production: 
+  redis_url: redis://username:password@host:1234/

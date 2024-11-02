@@ -1,0 +1,9 @@
+$('#mc_answers_#{index}').html('
+- unless question[:options].nil?
+  - question[:options].each_with_index do |option, index2|
+    - # {:question=>"If a=1, b=2. What is a+b?", :points=>1, :options=>[{:answer=>"12", :check=>false}, {:answer=>"3", :check=>true}, {:answer=>"4", :check=>false}]}
+    %div{class: "field", id: "answer_field_div_#{index}_#{index2}"}
+      = check_box_tag "multiple_choice_task[questions][#{index}][option][#{index2}][check]", 1, option[:check]
+      = text_field_tag "multiple_choice_task[questions][#{index}][option][#{index2}][answer]", option[:answer], size: 20, class: 'right_textfield'
+      = link_to t(:delete), cockpit_game_editor_path(id: game.id, tasks: true, task_id: task.id, _action: :del_mc_a, q_idx: index, a_idx: index2), 'data-method' => :put, remote: true, id: "del_q_#{index}_a_#{index2}", class: "btn btn-danger", style: 'margin-bottom: 9px'
+');

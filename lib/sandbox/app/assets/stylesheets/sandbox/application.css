@@ -1,0 +1,16 @@
+div.left {
+    width: 400px;
+    height: 250px;
+    padding-left: 10px;
+    float: left;
+    border: solid #000000;
+    border-width: 0px 1px 1px 0px;
+}
+div.last {
+    width: 400px;
+    height: 250px;
+    padding-left: 10px;
+    float: left;
+    border: solid #000000;
+    border-width: 0px 1px 1px 0px;
+}

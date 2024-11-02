@@ -1,0 +1,25 @@
+!!!
+
+%html{lang: 'de'}
+  %head
+    %meta{charset: 'utf-8'}
+    %title= 'rylyty'
+
+    -# Include Stylesheets
+    -#
+    = stylesheet_link_tag 'application'
+    -#Enabling bootstrap's responsive features
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
+    = stylesheet_link_tag 'temporary-tweaks'
+    = javascript_include_tag 'application'
+
+  %body
+    %div
+      - if flash[:alert].present?
+        %div.alert.alert-error
+          = flash[:alert]
+
+      - if flash[:notice].present?
+        %div.alert.alert-info
+          = flash[:notice]
+    = yield

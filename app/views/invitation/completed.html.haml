@@ -1,0 +1,47 @@
+%div#spacer
+%p.success
+  ✓
+  = t('invitation.conformation_headline')
+=#*************************************************************************************************************
+%div#spacer
+%p.active
+  = t('invitation.conformation_response_no_idevice')
+  %br &nbsp;
+%p
+  %span.active
+    Später auf iPhone oder iPod laden?
+  %br
+  \- Ja, schickt mir die Zugangsdaten 
+  = render 'mail_registration'
+  !
+  %br
+  \- Klar, gib mir einfach das 
+  =link_to "ipa-File", @invitation.download_link.generate_url(direct: 1), rel: 'nofollow'
+  für iTunes!
+
+%p
+  %span.active
+    Du hast kein iPhone, iPod oder i-Irgendwas?
+  %br
+  Dann schau solange mal auf unserem
+  = link_to "Blog", blog_url, target: "_blank"
+  vorbei.
+  %br
+  Der ist auch nett.
+
+%div#spacer
+%p &nbsp;
+%p
+  Link noch mal
+  = render 'mail_registration'
+  bekommen? 
+%p &nbsp;
+%p
+  = link_to "Impressum", impressum_url, target: "_blank"
+  = link_to "Blog", blog_url, target: "_blank"
+
+%script
+  $(document).ready(function() {
+  if (window._gaq) window._gaq.push(['_trackEvent', 'Invitation Signup', 'confirmed', 'Invitation Signup confirmed']);
+  });
+=#*************************************************************************************************************

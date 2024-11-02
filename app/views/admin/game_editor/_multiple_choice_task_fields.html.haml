@@ -1,0 +1,23 @@
+- @task.questions.each_with_index do |question, index|
+  - # {:question=>"If a=1, b=2. What is a+b?", :points=>1, :options=>[{:answer=>"12", :check=>false}, {:answer=>"3", :check=>true}, {:answer=>"4", :check=>false}]}
+  %hr
+  .mc_question
+    = label_tag(:question, "#{t(:question)} #{(index + 1)}")
+    = text_field_tag "multiple_choice_task[questions][#{index}][question]", question[:question], size: 20, class: 'span5'
+    = link_to t(:delete), cockpit_game_editor_path(id: @game.id, tasks: true, task_id: @task.id, _action: :del_mc_q, q_idx: index), 'data-method' => :put, remote: true, id: "del_q_#{index}", class: 'btn btn-danger'
+  %div{class: "field", id: "points_field_div_#{index}"}
+    = label_tag(:points, t(:points))
+    = text_field_tag "multiple_choice_task[questions][#{index}][points]", question[:points], size: 20, class: 'span2'
+  %div{:id => "mc_answers_#{index}"}
+    - unless question[:options].nil?
+      - question[:options].each_with_index do |option, index2|
+        - # {:question=>"If a=1, b=2. What is a+b?", :points=>1, :options=>[{:answer=>"12", :check=>false}, {:answer=>"3", :check=>true}, {:answer=>"4", :check=>false}]}
+        %p Antwort
+        %div{:id => "answer_field_div_#{index}_#{index2}"}
+          = check_box_tag "multiple_choice_task[questions][#{index}][option][#{index2}][check]", 1, option[:check]
+          = text_field_tag "multiple_choice_task[questions][#{index}][option][#{index2}][answer]", option[:answer], size: 20, class: 'answer_input_width'
+          = link_to t(:delete), cockpit_game_editor_path(id: @game.id, tasks: true, task_id: @task.id, _action: :del_mc_a, q_idx: index, a_idx: index2), 'data-method' => :put, remote: true, id: "del_q_#{index}_a_#{index2}", class: "btn btn-danger", style: 'margin-bottom: 9px'
+  - # /div id="mc_answers_#{index}"
+  %div{style: "padding-top: 20px"}
+    = link_to t(:add_answer), "javascript:gameEditor.addTaskTypeInput(\'a\', #{index});", id: "add_a_to_q_#{index}", class: "btn btn-primary"
+  %br

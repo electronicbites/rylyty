@@ -1,0 +1,20 @@
+id: 444f5a20-ee9e-012f-03ae-1231381d47d5
+setup:
+  commands:
+  - bundle install --without production
+  - bundle exec rake db:migrate --trace
+test:
+  commands:
+  - rake db:test:prepare
+  - bundle exec rspec spec
+deploy:
+  heroku:
+    staging:
+      name: rylyty-staging
+      branch: staging
+    production:
+      name: rylyty
+      branch: master
+      backup: false
+ruby_versions:
+- 1.9.3

@@ -1,0 +1,17 @@
+
+= form_tag(admin_game_path(@game), method: :put, multipart: true) do
+  - if @game.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@game.errors.count, "error")
+        prohibited this game from being saved:
+      %ul
+        - @game.errors.full_messages.each do |msg|
+          %li
+            = msg
+  = hidden_field_tag 'game[id]', @game.id
+  .field
+    = label_tag 'image'
+    = file_field_tag  'game[image]'
+  .actions
+    = submit_tag 'Upload a game image'

@@ -1,0 +1,8 @@
+%p
+  Hallo,
+  dieser Beweis, sollte überprüft werden
+  = link_to "Beweis anzeigen", "#{cockpit_user_task_path(id: @user_task.id)}"
+
+  Der Task wurde von folgendem Benutzer gemeldet:
+  = link_to 'Benutzer anzeigen', "#{cockpit_user_path(id: @reporter.id)}"
+

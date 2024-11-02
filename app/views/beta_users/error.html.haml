@@ -1,0 +1,33 @@
+.block
+  %h1
+    = image_tag "signet-rylyty.png", :id => "signet-rylyty"
+  %hr
+  %hr
+
+.block
+  
+  %h1#register Sei von Anfang an dabei
+  %h2 Melde dich jetzt für den Betatest an!
+  =#*************************************************************************************************************
+  #beta-form
+    = form_for :beta_user, url: beta_users_path, remote: true, html: { id: 'new_beta_user' }  do |f|
+
+      #email_field_wrapper
+        = f.email_field :email, placeholder: "Deine E-Mail-Adresse"
+        = button_tag "Ich bin dabei", id: "btn-dabei", class: "btn sent", type: "submit"
+      #beta_user_email_height_wrapper
+        #beta_user_email_error{style: 'visibility:visible;'}
+          = @error_message
+        %p
+          = f.check_box :newsletter, checked: "checked"
+          = f.label :newsletter, "Ja, ich möchte den rylyty-Newsletter haben und immer Bescheid wissen, was passiert."
+        %p.small
+          Wir versenden unseren Newsletter mit dem externen Dienstleister MailChimp.
+          Wir haben was gegen Spam und werden deine E-Mail-Adresse niemals zu Werbezwecken an Dritte weitergeben.
+  =#*************************************************************************************************************
+  %hr
+  =#*************************************************************************************************************
+  %hr
+
+= render '/shared/social_buttons'
+$('#beta_user_email_error').html("#{@error_message}").css("visibility", "visible");

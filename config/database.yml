@@ -1,0 +1,26 @@
+
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: rylyty_development
+  pool: 5
+  username: postgres
+  password: postgres
+  host: localhost
+  port: 5432
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: rylyty_test
+  username: postgres
+  password: postgres
+  host: localhost
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: rylyty
+  pool: 5
+  username: rylyty
+  password:

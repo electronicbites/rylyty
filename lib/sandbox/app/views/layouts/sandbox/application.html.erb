@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>sandbox</title>
+  <%= stylesheet_link_tag "application", :media => "all" %>
+  <link href="assets/sandbox/application.css?body=1" media="all" rel="stylesheet" type="text/css" />
+  <%= javascript_include_tag "application" %>
+  <script src="assets/sandbox/application.js?body=1" type="text/javascript"></script>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<%= yield %>
+
+</body>
+</html>

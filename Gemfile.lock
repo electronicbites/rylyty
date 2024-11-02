@@ -1,0 +1,368 @@
+GIT
+  remote: git://github.com/fnordfish/rabl-rails.git
+  revision: 4c32de08b1500de5e22d2584304f3eb17660b290
+  branch: patch-1
+  specs:
+    rabl-rails (0.3.0)
+      activesupport (~> 3.0)
+      railties (~> 3.0)
+
+PATH
+  remote: lib/sandbox
+  specs:
+    sandbox (0.0.1)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    actionmailer (3.2.19)
+      actionpack (= 3.2.19)
+      mail (~> 2.5.4)
+    actionpack (3.2.19)
+      activemodel (= 3.2.19)
+      activesupport (= 3.2.19)
+      builder (~> 3.0.0)
+      erubis (~> 2.7.0)
+      journey (~> 1.0.4)
+      rack (~> 1.4.5)
+      rack-cache (~> 1.2)
+      rack-test (~> 0.6.1)
+      sprockets (~> 2.2.1)
+    activeadmin (0.6.2)
+      arbre (~> 1.0)
+      bourbon (>= 1.0.0, < 4)
+      devise (>= 1.5.4, < 4)
+      formtastic (~> 2.0)
+      inherited_resources (~> 1.3)
+      jquery-rails (>= 1.0.0, < 3)
+      kaminari (~> 0.13)
+      meta_search (~> 1.0)
+      rails (>= 3.0.0, < 4)
+      sass (~> 3.1)
+    activemodel (3.2.19)
+      activesupport (= 3.2.19)
+      builder (~> 3.0.0)
+    activerecord (3.2.19)
+      activemodel (= 3.2.19)
+      activesupport (= 3.2.19)
+      arel (~> 3.0.2)
+      tzinfo (~> 0.3.29)
+    activerecord-postgres-hstore (0.7.6)
+      activerecord (>= 3.1)
+      pg-hstore (>= 1.1.5)
+      rake
+    activeresource (3.2.19)
+      activemodel (= 3.2.19)
+      activesupport (= 3.2.19)
+    activesupport (3.2.19)
+      i18n (~> 0.6, >= 0.6.4)
+      multi_json (~> 1.0)
+    acts_as_list (0.3.0)
+      activerecord (>= 3.0)
+    addressable (2.3.5)
+    airbrake (3.1.14)
+      builder
+      json
+    apn_sender (2.0.0)
+      activesupport (>= 3.1)
+      connection_pool
+      daemons
+    ar_pg_array (0.11.2)
+      activerecord (>= 3.0.6, < 4.0)
+    arbre (1.0.1)
+      activesupport (>= 3.0.0)
+    arel (3.0.3)
+    aws-sdk (1.11.1)
+      json (~> 1.4)
+      nokogiri (>= 1.4.4)
+      uuidtools (~> 2.1)
+    bcrypt-ruby (3.1.2)
+    bootstrap-sass (2.3.2.2)
+      sass (~> 3.2)
+    bourbon (3.1.8)
+      sass (>= 3.2.0)
+      thor
+    builder (3.0.4)
+    capybara (2.1.0)
+      mime-types (>= 1.16)
+      nokogiri (>= 1.3.3)
+      rack (>= 1.0.0)
+      rack-test (>= 0.5.4)
+      xpath (~> 2.0)
+    capybara-email (2.2.0)
+      capybara (~> 2.1.0)
+      mail
+    capybara-screenshot (0.3.14)
+      capybara (>= 1.0, < 3)
+      launchy
+    capybara-webkit (1.0.0)
+      capybara (~> 2.0, >= 2.0.2)
+      json
+    climate_control (0.0.3)
+      activesupport (>= 3.0)
+    cocaine (0.5.2)
+      climate_control (>= 0.0.3, < 1.0)
+    coffee-rails (3.2.2)
+      coffee-script (>= 2.2.0)
+      railties (~> 3.2.0)
+    coffee-script (2.2.0)
+      coffee-script-source
+      execjs
+    coffee-script-source (1.6.3)
+    connection_pool (1.1.0)
+    daemons (1.1.9)
+    database_cleaner (1.2.0)
+    devise (2.1.2)
+      bcrypt-ruby (~> 3.0)
+      orm_adapter (~> 0.1)
+      railties (~> 3.1)
+      warden (~> 1.2.1)
+    diff-lcs (1.2.4)
+    dotenv (0.9.0)
+    email_spec (1.5.0)
+      launchy (~> 2.1)
+      mail (~> 2.2)
+    erubis (2.7.0)
+    execjs (2.0.2)
+    factory_girl (4.2.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.2.1)
+      factory_girl (~> 4.2.0)
+      railties (>= 3.0.0)
+    faraday (0.8.8)
+      multipart-post (~> 1.2.0)
+    flexmock (1.3.2)
+    formtastic (2.2.1)
+      actionpack (>= 3.0)
+    haml (4.0.3)
+      tilt
+    haml-rails (0.4)
+      actionpack (>= 3.1, < 4.1)
+      activesupport (>= 3.1, < 4.1)
+      haml (>= 3.1, < 4.1)
+      railties (>= 3.1, < 4.1)
+    haml_assets (0.2.2)
+      haml
+      tilt
+    handlebars_assets (0.14.1)
+      execjs (>= 1.2.9)
+      sprockets (>= 2.0.3)
+      tilt
+    has_scope (0.6.0.rc)
+      actionpack (>= 3.2, < 5)
+      activesupport (>= 3.2, < 5)
+    headless (1.0.1)
+    hike (1.2.3)
+    i18n (0.6.11)
+    inherited_resources (1.4.1)
+      has_scope (~> 0.6.0.rc)
+      responders (~> 1.0.0.rc)
+    journey (1.0.4)
+    jquery-rails (2.3.0)
+      railties (>= 3.0, < 5.0)
+      thor (>= 0.14, < 2.0)
+    json (1.8.1)
+    kaminari (0.14.1)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
+    kgio (2.8.1)
+    koala (1.6.0)
+      addressable (~> 2.2)
+      faraday (~> 0.8)
+      multi_json (~> 1.3)
+    launchy (2.3.0)
+      addressable (~> 2.3)
+    libv8 (3.16.14.3)
+    mail (2.5.4)
+      mime-types (~> 1.16)
+      treetop (~> 1.4.8)
+    meta_search (1.1.3)
+      actionpack (~> 3.1)
+      activerecord (~> 3.1)
+      activesupport (~> 3.1)
+      polyamorous (~> 0.5.0)
+    mime-types (1.25.1)
+    mini_portile (0.5.1)
+    mono_logger (1.1.0)
+    multi_json (1.10.1)
+    multipart-post (1.2.0)
+    newrelic_rpm (3.6.8.168)
+    nokogiri (1.6.0)
+      mini_portile (~> 0.5.0)
+    orm_adapter (0.4.0)
+    paperclip (3.5.1)
+      activemodel (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      cocaine (~> 0.5.0)
+      mime-types
+    pg (0.17.0)
+    pg-hstore (1.2.0)
+    pg_search (0.7.0)
+      activerecord (>= 3.1)
+      activesupport (>= 3.1)
+      arel
+    polyamorous (0.5.0)
+      activerecord (~> 3.0)
+    polyglot (0.3.5)
+    rack (1.4.5)
+    rack-cache (1.2)
+      rack (>= 0.4)
+    rack-mobile-detect (0.4.0)
+      rack
+    rack-protection (1.5.1)
+      rack
+    rack-ssl (1.3.4)
+      rack
+    rack-test (0.6.2)
+      rack (>= 1.0)
+    rails (3.2.19)
+      actionmailer (= 3.2.19)
+      actionpack (= 3.2.19)
+      activerecord (= 3.2.19)
+      activeresource (= 3.2.19)
+      activesupport (= 3.2.19)
+      bundler (~> 1.0)
+      railties (= 3.2.19)
+    railties (3.2.19)
+      actionpack (= 3.2.19)
+      activesupport (= 3.2.19)
+      rack-ssl (~> 1.3.2)
+      rake (>= 0.8.7)
+      rdoc (~> 3.4)
+      thor (>= 0.14.6, < 2.0)
+    raindrops (0.12.0)
+    rake (10.3.2)
+    rdoc (3.12.2)
+      json (~> 1.4)
+    redis (3.0.5)
+    redis-namespace (1.3.1)
+      redis (~> 3.0.0)
+    ref (1.0.5)
+    responders (1.0.0)
+      railties (>= 3.2, < 5)
+    resque (1.24.1)
+      mono_logger (~> 1.0)
+      multi_json (~> 1.0)
+      redis-namespace (~> 1.2)
+      sinatra (>= 0.9.2)
+      vegas (~> 0.1.2)
+    resque-scheduler (2.2.0)
+      redis (>= 3.0.0)
+      resque (>= 1.20.0, < 1.25)
+      rufus-scheduler (~> 2.0)
+    resque_mailer (2.2.5)
+      actionmailer (>= 3.0)
+    resque_spec (0.14.2)
+      resque (>= 1.19.0)
+      rspec-core (>= 2.5.0)
+      rspec-expectations (>= 2.5.0)
+      rspec-mocks (>= 2.5.0)
+    rpm_contrib (2.1.11)
+      newrelic_rpm (>= 3.1.1)
+      newrelic_rpm (>= 3.1.1)
+    rspec-core (2.14.6)
+    rspec-expectations (2.14.3)
+      diff-lcs (>= 1.1.3, < 2.0)
+    rspec-mocks (2.14.4)
+    rspec-rails (2.14.0)
+      actionpack (>= 3.0)
+      activesupport (>= 3.0)
+      railties (>= 3.0)
+      rspec-core (~> 2.14.0)
+      rspec-expectations (~> 2.14.0)
+      rspec-mocks (~> 2.14.0)
+    rufus-scheduler (2.0.24)
+      tzinfo (>= 0.3.22)
+    sass (3.2.12)
+    sass-rails (3.2.6)
+      railties (~> 3.2.0)
+      sass (>= 3.1.10)
+      tilt (~> 1.3)
+    sinatra (1.4.4)
+      rack (~> 1.4)
+      rack-protection (~> 1.4)
+      tilt (~> 1.3, >= 1.3.4)
+    sprockets (2.2.2)
+      hike (~> 1.2)
+      multi_json (~> 1.0)
+      rack (~> 1.0)
+      tilt (~> 1.1, != 1.3.0)
+    state_machine (1.2.0)
+    test_after_commit (0.2.1)
+    therubyracer (0.12.0)
+      libv8 (~> 3.16.14.0)
+      ref
+    thor (0.19.1)
+    tilt (1.4.1)
+    treetop (1.4.15)
+      polyglot
+      polyglot (>= 0.3.1)
+    tzinfo (0.3.41)
+    uglifier (2.2.1)
+      execjs (>= 0.3.0)
+      multi_json (~> 1.0, >= 1.0.2)
+    unicorn (4.6.3)
+      kgio (~> 2.6)
+      rack
+      raindrops (~> 0.7)
+    uuidtools (2.1.4)
+    vcr (2.6.0)
+    vegas (0.1.11)
+      rack (>= 1.0.0)
+    warden (1.2.3)
+      rack (>= 1.0)
+    xpath (2.0.0)
+      nokogiri (~> 1.3)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  activeadmin
+  activerecord-postgres-hstore
+  acts_as_list
+  airbrake
+  apn_sender
+  ar_pg_array
+  aws-sdk
+  bootstrap-sass
+  capybara
+  capybara-email
+  capybara-screenshot
+  capybara-webkit
+  coffee-rails
+  database_cleaner
+  devise (= 2.1.2)
+  dotenv
+  email_spec
+  factory_girl_rails
+  faraday
+  flexmock
+  haml (>= 3.0.0)
+  haml-rails
+  haml_assets (>= 0.1.0)
+  handlebars_assets
+  headless
+  jquery-rails
+  koala
+  newrelic_rpm (>= 3.5.4)
+  paperclip (~> 3.0)
+  pg
+  pg_search
+  rabl-rails!
+  rack-mobile-detect
+  rails (= 3.2.19)
+  resque-scheduler
+  resque_mailer
+  resque_spec
+  rpm_contrib
+  rspec-rails (>= 2.11.0)
+  sandbox!
+  sass
+  sass-rails
+  state_machine
+  test_after_commit
+  therubyracer
+  uglifier (>= 1.0.3)
+  unicorn
+  vcr

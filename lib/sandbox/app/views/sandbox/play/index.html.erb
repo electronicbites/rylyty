@@ -1,0 +1,108 @@
+[<a href="/sandbox">reset</a>]<br /><br />
+<div id="links">
+    <ul>
+        <li>
+            <a href="//<%= request.env['HTTP_HOST'] %>/api/v1/logout.json"><b>logout:</b> http://<%= request.env['HTTP_HOST'] %>/api/v1/logout.json</a>
+        </li>
+        <li>
+            <a href="//<%= request.env['HTTP_HOST'] %>/cockpit/game_editors/new"><b>create game:</b> //<%= request.env['HTTP_HOST'] %>/cockpit/game_editors/new</a>
+        </li>
+        <li>
+            <a href="//<%= request.env['HTTP_HOST'] %>/api/v1/my/games.json"><b>list my games:</b> http://<%= request.env['HTTP_HOST'] %>/api/v1/my/games.json</a>
+        </li>
+    </ul>
+</div>
+<br />
+<div>
+    all forms will be sent to host given in textfield.<br />
+    the [set host] link is only used to change the host in links (above) as well.
+</div>
+<div>
+    <%=form_tag('#', id: :host_form) do %>
+        <h4 style="float:left;">host</h4>: <input type="text" name="host" value="<%= params[:host].present? ? params[:host] : request.env['HTTP_HOST'] %>" />&nbsp;[<a href="javascript:setHost();">set host</a>]
+        &nbsp;&nbsp;[<a href="javascript:setHost('staging.rylyty.com');">set <u>staging.rylyty.com</u></a>]
+        &nbsp;&nbsp;[<a href="javascript:setHost('www.rylyty.com');">set <u>www.rylyty.com</u></a>]<br />
+    <% end %>
+</div>
+<div class="left"><h4>login</h4>
+    <%=form_tag('//:host/api/v1/login.json', method: :post, id: :login_form, target: 'api_response') do %>
+        username: <input type="text" name="login" /><br />
+        password: <input type="text" name="password" /><br />
+        <input type="button" name="submit_worker" value="!!! LOGIN !!!" onclick="submitForm('login', new Array(), new Array(), new Array())">
+        <input id="login_submit" type="submit" name="submit" style="display:none;">
+    <% end %>
+</div>
+<div class="left"><h4>generic</h4>
+    <%=form_tag('//:host:path', method: :post, id: :generic_form, target: 'api_response') do %>
+        path: <input id="generic_path" type="text" name="path" placeholder="/api/v1/my/tasks/9/answer.json" /><br />
+        [<input type="radio" name="generic_method" value="post" checked onChange="toggleMethod('generic')" />&nbsp;POST]&nbsp;&nbsp;[<input type="radio" name="generic_method" value="put" onChange="toggleMethod('generic')" />&nbsp;PUT]&nbsp;&nbsp;<br />
+        data: <textarea id="generic_postdata" type="text" name="postdata" placeholder="answer_with[answer]=jomei"></textarea><br />
+        <input type="button" name="submit_worker" value="!!! SUBMIT !!!" onclick="if($('#generic_path').val() == ''){alert('missing path');return false;}submitForm('generic', new Array(':path'), new Array($('#generic_path').attr('value')), new Array($('#generic_path'), $('#generic_method')))">
+        <input id="generic_submit" type="submit" name="submit" style="display:none;">
+    <% end %>
+</div>
+<div class="last"><h4>buy game</h4>
+    <%=form_tag('//:host/api/v1/games/:id/buy.json', method: :post, id: :buy_game_form, target: 'api_response') do %>
+        id: <input id="buy_game_id" type="text" name="id" /><br />
+        <input type="button" name="submit_worker" value="!!! BUY GAME !!!" onclick="submitForm('buy_game', new Array(':id'), new Array($('#buy_game_id').attr('value')), new Array())">
+        <input id="buy_game_submit" type="submit" name="submit" style="display:none;">
+    <% end %>
+</div>
+<div class="left"><h4>start task</h4>
+    <%=form_tag('//:host/api/v1/my/tasks/:id/start.json', method: :post, id: :start_task_form, target: 'api_response') do %>
+        id: <input id="start_task_id" type="text" name="id" /><br />
+        <input type="button" name="submit_worker" value="!!! START TASK !!!" onclick="submitForm('start_task', new Array(':id'), new Array($('#start_task_id').attr('value')), new Array())">
+        <input id="start_task_submit" type="submit" name="submit" style="display:none;">
+    <% end %>
+</div>
+<div class="left"><h4>cancel task</h4>
+    <%=form_tag('//:host/api/v1/my/tasks/:id/cancel.json', method: :post, id: :cancel_task_form, target: 'api_response') do %>
+        id: <input id="cancel_task_id" type="text" name="id" /><br />
+        <input type="button" name="submit_worker" value="!!! CANCEL TASK !!!" onclick="submitForm('cancel_task', new Array(':id'), new Array($('#cancel_task_id').attr('value')), new Array())">
+        <input id="cancel_task_submit" type="submit" name="submit" style="display:none;">
+    <% end %>
+</div>
+<div class="last"><h4>answer task</h4>
+    <%=form_tag('//:host/api/v1/my/tasks/:id/answer.json', method: :post, id: :answer_task_form, target: 'api_response') do %>
+        id: <input id="answer_task_id" type="text" name="id" /><br />
+        [<input type="radio" name="answer_task_type" value="text" checked onChange="toggleAnswerType()" />&nbsp;TEXT]&nbsp;&nbsp;[<input type="radio" name="answer_task_type" value="photo" onChange="toggleAnswerType()" />&nbsp;PHOTO]&nbsp;&nbsp;[<input type="radio" name="answer_task_type" value="mc" onChange="toggleAnswerType()" />&nbsp;MULTIPLE CHOICE]<br />
+        <div id="answer_task_input_text">
+            <textarea id="answer_with_answer_text" type="text" name="answer_with[answer]"></textarea>
+        </div>
+        <div id="answer_task_input_file" style="display:none;">
+            <%= file_field 'answer_with', 'photo', id: 'answer_with_answer_file' %>
+        </div>
+        <div id="answer_task_input_mc" style="display:none;">
+            [<a href="javascript:addMCQuestion()">add question</a>]&nbsp;&nbsp;[<a href="javascript:removeMCQuestion()">remove question</a>]<br />
+            <div id="answer_task_input_mc_question_1">
+                question 1 - answer: <select id="answer_with_answers_mc_q_0" type="text" name="answer_with[answers][0][]" style="width:50px;">
+                                        <% (1..10).each do |n| %>
+                                        <option value="<%= (n - 1) %>"><%= n %></option>
+                                        <% end%>
+                                     </select>
+            </div>
+        </div>
+        <input type="button" name="submit_worker" value="!!! ANSWER TASK !!!" onclick="prepareAnswerTask();submitForm('answer_task', new Array(':id'), new Array($('#answer_task_id').attr('value')), new Array())">
+        <input id="answer_task_submit" type="submit" name="submit" style="display:none;">
+    <% end %>
+</div>
+<br />
+<p style="display:none;">
+    answer: 
+    <textarea style="width:98%;" cols="100" rows="3" readonly>
+text:
+answer_with[answer]=jomei
+mc:
+answer_with[answers][0][]=1&answer_with[answers][1][]=2&answer_with[answers][2][]=2&answer_with[answers][3][]=2
+    </textarea>
+</p>
+<p style="display:none;">
+    create user: 
+    <textarea style="width:98%;" cols="100" rows="2" readonly>
+post /api/v1/signup.json
+user[username]=foo456&user[email]=foo456@example.com&user[password]=123456&user[password_confirmation]=123456&user[birthday]=13.10.1973&user[tos]=true
+    </textarea>
+</p>
+<% if params[:host].present? %>
+<script type="text/javascript">setHost('<%= params[:host] %>');</script>
+<% end %>

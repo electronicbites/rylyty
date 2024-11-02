@@ -1,0 +1,7 @@
+%div{class: "container"}
+  %div{class: 'row'}
+    %div{class: 'span2'}
+      = render partial: 'admin/game_editor/editor_nav'
+  
+  %div{style: 'clear:both;'}
+    = render partial: task_editor ? 'admin/game_editor/task_editor' : 'admin/game_editor/game_editor' 

@@ -1,0 +1,55 @@
+!!!
+
+%html{lang: 'de'}
+  %head
+    = render partial: '/layouts/google_analytics'
+    %noscript
+      Diese Seite wurde mit JavaScript optimiert, bitte aktivieren Sie Javascript
+    %meta{charset: 'utf-8'}
+    %title= 'Deine App für neue Spiele – rylyty'
+    %meta{name: 'description', content: 'Spiel mit deinen Freunden und der ganzen Community neue Spiele über die rylyty-App. Nicht nur am Computer, sondern draußen. rylyty – die neue Generation von Reality Games.'}
+    %meta{name: 'keywords', content: 'Game,Spiel,Reality,App,Freunde,draussen,draußen'}
+
+    -# Include Stylesheets
+    -#
+    = stylesheet_link_tag 'application'
+    -#Enabling bootstrap's responsive features
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
+    = stylesheet_link_tag 'temporary-tweaks'
+    = javascript_include_tag 'application'
+
+  %body
+    #headerstatic
+      %header#top-header
+        %div
+          %a{href: "/", id: "header-rylyty"}
+          #header-right
+            = link_to "http://www.facebook.com/pages/Rylyty/101666406661432", target: '_blank' do
+              = button_tag "facebook", id: "facebook", class: "btn", type: "button"
+
+            = link_to "https://twitter.com/rylyty", target: '_blank' do
+              = button_tag "twitter", id: "twitter", class: "btn", type: "button"
+
+            = link_to blog_url, target: "_blank" do
+              = button_tag "blog", id: "blog", class: "btn", type: "button"
+
+    .bg_wrap
+      #header_bg
+      .wrap
+        %div
+          - if flash[:alert].present?
+            %div.alert.alert-error
+              = flash[:alert]
+
+          - if flash[:notice].present?
+            %div.alert.alert-info
+              = flash[:notice]
+        = yield
+
+    %footer#bottom-footer
+      %div
+        %a{href: "/", id: "footer-rylyty"}
+        #footer-right
+          = link_to "Registrieren", 'http://www.rylyty.com/#register', id: "register_lnk"
+          = link_to "Blog", blog_url, target: "_blank"
+          = link_to "Impressum", impressum_url

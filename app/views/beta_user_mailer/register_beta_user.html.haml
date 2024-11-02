@@ -1,0 +1,22 @@
+%h3
+  rylyty – Spiel mit!
+%p
+  Hallo,
+  %br
+- if @beta_user.newsletter?
+  du hast dich gerade bei rylyty.com registiert und den Newsletter gleich mit abonniert, richtig? Weise Entscheidung!
+- else
+  du hast dich gerade bei rylyty.com registiert, richtig? Weise Entscheidung!
+Bitte klicke zur Bestätigung auf diesen
+= link_to 'Link', beta_user_confirmation_url(confirmation_token: @beta_user.confirmation_token)
+!
+%p
+  Sobald wir startbereit sind und du dir die rylyty-App runterladen kannst, werden wir dich benachrichtigen.
+  Hab Geduld, wir laufen auf Hochtouren.
+%p
+  Das rylyty-Team
+%p{style: 'font-size:smaller;'}
+  - if @beta_user.newsletter?
+    Das ist eine automatisch erstellte E-Mail von rylyty.com, die du bekommen hast, weil du dich in unserem System registriert und dich für den rylyty-Newsletter eingetragen hast. Wenn das nicht der Fall ist, ignoriere diese Nachricht einfach. Wir werden dich dann nicht noch mal kontaktieren. Bitte antworte nicht auf diese E-Mail.
+  -else
+    Das ist eine automatisch erstellte E-Mail von rylyty.com, die du bekommen hast, weil du dich in unserem System registriert hast. Wenn das nicht der Fall ist, ignoriere diese Nachricht einfach. Wir werden dich dann nicht noch mal kontaktieren. Bitte antworte nicht auf diese E-Mail.

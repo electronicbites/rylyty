@@ -1,0 +1,8 @@
+$('#beta_user_email').attr('disabled', 'disabled');
+$('#beta_user_email_height_wrapper').html('<div id="beta_user_email_confirm"><p>Das hat geklappt. Du bekommst jetzt eine E-Mail mit einem Aktivierungslink. So gehen wir sicher, dass die E-Mail-Adresse auch wirklich deine ist.</p><p class="bold">Klicke einfach auf den Link in der E-Mail, um deine Registrierung abzuschliessen.</p></div>');
+$('#btn-dabei').addClass('sent');
+$('#btn-dabei').attr('disabled', 'disabled');
+- if @beta_user.newsletter?
+  _gaq.push(['_trackEvent', 'Beta Signup', 'registered + newsletter', 'Beta Signup with Newsletter']);
+-else
+  _gaq.push(['_trackEvent', 'Beta Signup', 'registered', 'Beta Signup without Newsletter']);

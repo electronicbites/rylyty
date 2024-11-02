@@ -1,0 +1,17 @@
+.block.center
+  %h1 Bleib auf dem Laufenden
+  %h2
+    Zum Lesen, zum Gutfinden und zum Weiterzwitschern -
+    %br/
+    alles auf einmal oder ganz wie du magst.
+  .row-fluid-wrap
+    .row-fluid
+      .span4
+        %a{:href => "http://www.facebook.com/pages/Rylyty/101666406661432", :target => "_blank"}
+          = image_tag "fb.png"
+      .span4
+        %a{:href => "https://twitter.com/rylyty", :target => "_blank"}
+          = image_tag "tw.png", id: "twitter_png"
+      .span4
+        %a{:href => blog_url, :target => "_blank"}
+          = image_tag "bl.png", id: "blog_png"

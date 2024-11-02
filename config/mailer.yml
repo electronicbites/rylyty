@@ -1,0 +1,8 @@
+development: 
+  admin: admin@rylyty.com
+  info: info@rylyty.com
+  noreply: no-reply@rylyty.com 
+production: 
+  admin: admin@rylyty.com
+  info: info@rylyty.com
+  noreply: no-reply@rylyty.com

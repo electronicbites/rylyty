@@ -1,0 +1,17 @@
+.git*
+.ci
+.dockerdev
+.idea
+.semaphore-cache
+db/*.sqlite3
+db/*.sqlite3-journal
+log/*
+tmp
+Dockerfile
+docker-compose.yml
+docker-compose.ci.yml
+README.md
+spec/*
+coverage/*
+infrastructure
+spec

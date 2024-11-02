@@ -1,0 +1,135 @@
+%h1= @game.title
+- if @game.errors.any?
+  .row.rowpad
+    .span11.offset1
+      #error_explanation
+        %h2
+          = "#{pluralize(@game.errors.count, "error")} prohibited this game from being saved:"
+        %ul
+          - @game.errors.full_messages.each do |msg|
+            %li
+              = msg
+
+.row.rowpad{style: "display:none"}
+  .span11.offset1
+  = form_for(:tag, url: "/cockpit/game_editors", remote: true, html: { id: 'add_category_form' }) do
+    - unless @game.id.nil?
+      %input{type: 'hidden', name: 'game_id', value: @game.id}
+    %input{type: 'hidden', name: 'new_category_name', value: ''}
+
+- unless @game.new_record?
+  - unless @game.tasks.length == 0
+    .row.rowpad
+      .span12
+        %h2 Taskliste
+        %ul#tasklist{class: "tasklist"}
+          - @game.tasks.each do |task|
+            %li{id:"task_#{task.id}"}
+              %div{style: "float:left;"}
+                = link_to task.title, "#{edit_cockpit_game_editor_path(id: @game.id, task_id: task.id, tasks: true)}"
+              %div{style: "float:right;"}
+                = link_to t(:edit), "#{edit_cockpit_game_editor_path(id: @game.id, task_id: task.id, tasks: true)}", class: 'btn btn-primary'
+                = link_to t(:delete), "#{cockpit_game_editor_path(id: @game.id, task_id: task.id, tasks: false)}", 'data-method' => :delete, class: 'btn btn-danger'
+  .row.rowpad.well
+    .span11
+      .btn-group
+        %input{:onClick => "document.location.href='#{edit_cockpit_game_editor_path(id: @game.id, tasks: true)}';return true;", :type => "submit", :value => t(:add_task), :class => "btn btn-primary"}
+= form_for(@game, url: "/cockpit/game_editors#{@game.id.nil? ? '' : '/'.concat(@game.id.to_s) }", multipart: true) do |f|
+  .row.rowpad
+    .span6
+      = label_tag(:mission, t(:mission))
+      = select(:game, :mission_ids, Mission.order('id asc').collect{|mission|[mission.id, mission.id]}, {}, { multiple: true, size: 1, selected: @game.missions.collect{|mission|mission.id}, id: 'mission_ids' })
+
+      = f.label :title, t(:game_title)
+      = f.text_field :title, placeholder: 'max. 40 Zeichen'
+    
+      = f.label :short_description, t(:short_description)
+      = f.text_field :short_description, class: "span6"
+
+      = f.label :description, t(:description)
+      = f.text_area :description, rows: 10, class: 'span6'
+
+      = f.label :suggestion, t(:suggestion)
+      = f.text_area :suggestion, rows: 5, class: 'span6'
+
+      = f.label :image, t(:image)
+      - if @game.image.present?
+        = image_tag @game.image.url(:normal_hi)
+      = f.file_field :image
+
+      = f.label :icon, t(:icon)
+      - if @game.icon.present?
+        = image_tag @game.icon.url(:normal_hi)
+      = f.file_field :icon
+
+    .span6
+      = label_tag(:categories, t(:category))
+      = select(:game, :category_ids, Tag.where(:context => Tag::GAME_CATEGORY_TYPE).order('value asc').collect{|tag|[tag.value, tag.id]}, {}, { multiple: true, size: 5, selected: @game.categories.collect{|tag|tag.id }, id: 'tag_ids', class: 'span6'  })
+      
+      .controls.controls-row
+        = text_field_tag :new_category, '', size: 20, class: 'span3', style: 'margin-left: 0px'
+        = link_to t(:add_category), 'javascript:gameEditor.addCategory();', class: 'btn btn-primary span2'
+
+      .span6{style: 'margin-left: 0px'}
+        %b Belohnung 
+      
+      .controls.controls-row
+        %a{href: '/admin/game_points_helper.html', target: '_blank', style: 'margin-left: 0px', class: 'span3'}
+          Punkte
+        = label_tag :badge, "Badge",  class: 'span3'
+
+      .controls.controls-row
+        = f.text_field :points, size: 20, class: 'span3'
+        = select('game[reward_badge_id]', '', Badge.order('title asc').collect{|badge|[badge.title, badge.id]}, { selected: @game.reward_badge.nil? ? nil : @game.reward_badge.id.to_s, include_blank: '---' }, { id: 'game_reward_badge_id', class: 'span3' })
+
+      .controls.controls-row
+        = label_tag :costs, t(:costs), class:'span3', style: 'margin-left: 0px'
+        = label_tag :time_limit, t(:time_limit), class:'span3'
+
+      .controls.controls-row
+        = f.text_field :costs, (@game.id.nil? ? { value: 0 } : {}).merge(class: 'span3', placeholder: 'Bitte ausfüllen')
+        = f.text_field :time_limit, (@game.id.nil? || @game.time_limit.nil? ? { placeholder: '00:00:00' } : { value: secs_to_duration(@game.time_limit)}).merge(class: 'span3')
+      
+      .controls.controls-row
+        = label_tag(:minimum_age, t(:minimum_age))
+        = f.text_field :minimum_age, (@game.id.nil? ? { value: 0 } : {}).merge(size: 20, class: 'span3')
+
+      .span6{style: 'margin-left: 0px'}
+        %b Beschränkung 
+      
+      .controls.controls-row
+        = label_tag :points, t(:points), class:'span3', style: 'margin-left: 0px'
+        = label_tag :badge, "Badge", class:'span3'
+
+      .controls.controls-row
+        = f.text_field :restriction_points, size: 20, class: 'span3'
+        = select('game[restriction_badge_id]', '', Badge.order('title asc').collect{|badge|[badge.title, badge.id]}, { selected: @game.restriction_badge.nil? ? nil : @game.restriction_badge.id.to_s, include_blank: '---' }, { id: 'game_restriction_badge_id', class: 'span3' })
+            
+    .row
+      .span1.offset11
+        = submit_tag @game.id.nil? ? 'erstellen' : 'speichern', id: 'edit_submit', class: 'btn btn-inverse btn-large'
+
+:javascript
+  $(function() {
+
+    $('#tasklist').sortable(
+    {
+      dropOnEmpty: false,
+      cursor: 'crosshair',
+      items: 'li',
+      update: function(){
+      $.ajax({
+        type: 'post',
+        data: {
+          'tasks': $('#tasklist').sortable('serialize'),
+          'id': "#{@game.id}"
+        },
+        dataType: 'script',
+        complete: function(request){
+          $('#tasklist').effect('highlight');
+        },
+      url: "/cockpit/game_editors/#{@game.id}/sort_tasks"})
+      }
+    }); 
+    //$( "#sortable" ).disableSelection();
+  });

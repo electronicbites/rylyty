@@ -1,0 +1,71 @@
+%h1 Game#create
+%p Find me in app/views/game/create.html.haml
+
+= form_for :game, :html => { :method => :post } do |form|
+  -
+  %fieldset
+    = form.label :name, "Name:"
+    = form.text_field :name, :value => "hallo welt"
+    %br
+    = form.label :language, "Language:"
+    = form.select :language, {'English' => :en, 'German' => :de}, :selected => :en
+    %br
+    = form.label :device_requirements, "Spiel Anforderungen:"
+    = form.text_field :device_requirements, :value => "flux-capacitor"
+    %br
+    = form.label :description, "Beschreibung:"
+    = form.text_field :description, :value => "Beschreibungstext..."
+    %br
+    = form.label :category, "Kategorie:"
+    = form.select :category, {'Lernen' => :learn, 'Reisen' => :travel}, :selected => :travel
+    %br
+    = form.label :creator, "Erschaffer:"
+    = form.text_field :creator, :value => "Devbliss"
+    %br
+    = form.label :cost, "Kosten:"
+    = form.text_field :cost, :value => "1 DM"
+    %br
+    = form.label :duration, "Dauer:"
+    = form.text_field :duration, :value => "100 Jahre"
+    %br
+    = form.label :visibility, "Sichtbarkeit:"
+    = form.radio_button :visibility, "bier", :checked => true
+    = form.radio_button :visibility, "bernd", '-data-awesome-attribute' => 123
+    %br
+
+  %fieldset
+    %legend Bedingungen:
+    = form.label :badges, "Badges"
+    = form.text_field :badges
+    %br
+    = form.label :happines, "Glück"
+    = form.text_field :happiness, value: 3000
+    %br
+    = form.label :age, "Alter"
+    = form.select :age_op, {'<' => :lt, '≤' => :le, '=' => :eq, '≠' => :ne, '≥' => :ge, '>' => :gt,}, :selected => :ge
+    = form.text_field :age
+    %br
+
+  = form.submit
+
+%hr
+
+
+%form{:name => "email", :id => "game", :action => "/game/create", :method => "post", :enctype => "text/plain"}
+    
+  %fieldset
+    %legend Aufgaben:
+    %label{:for => "game[type]"} Typ:
+    %input{:type => "text", :name => "game[type]", :id => "game[type]", :class => "text"}
+    %label{:for => "game[head]"} Titel:
+    %input{:type => "text", :name => "game[head]", :id => "game[head]", :class => "text"}
+    %label{:for => "game[text]"} Beschreibung:
+    %input{:type => "text", :name => "game[text]", :id => "game[text]", :class => "text"}
+    %label{:for => "game[points]"} Punkte:
+    %input{:type => "text", :name => "game[points]", :id => "game[points]", :class => "text"}
+    %label{:for => "game[badges]"} Badges:
+    %input{:type => "text", :name => "game[badges]", :id => "game[badges]", :class => "text"}
+
+  %input{:type => "submit", :value => "Send", :class => "button"}
+
+

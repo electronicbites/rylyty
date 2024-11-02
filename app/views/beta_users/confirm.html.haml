@@ -1,0 +1,16 @@
+.block.center
+  %h1 Liebst du es auch, wenn ein Plan funktioniert?
+  %h2 Deine Anmeldung war erfolgreich.
+  =#*************************************************************************************************************
+  %p
+    = t(:beta_registration_confirmation_response)
+  %script
+    $(document).ready(function() {
+    _gaq.push(['_trackEvent', 'Beta Signup', 'confirmed', 'Beta Signup confirmed']);
+    });
+
+  %a{:href => "http://www.facebook.com/pages/Rylyty/101666406661432", target: '_blank'}
+    = button_tag "btn_fb_share.png", :id => "btn_fb_share"
+  =#*************************************************************************************************************
+
+= render '/shared/social_buttons'

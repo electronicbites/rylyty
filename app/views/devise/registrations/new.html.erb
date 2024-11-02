@@ -1,0 +1,52 @@
+<div id="spacer"></div>
+<div><span class="active">➊ Registrieren</span></div>
+<div id="spacer"></div>
+
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+    <%= f.text_field :username, placeholder: "Benutzername" %>
+    <% e = resource.errors %>
+    <%if e[:username].present? %>
+      <div class="error_msg"><%=e[:username].first%></div>
+    <% e.clear %>  
+    <%end %>
+
+    <%= f.email_field :email, placeholder: "E-Mail" %>
+    <%if e[:email].present? %>
+      <div class="error_msg"><%=e[:email].first%></div>
+    <% e.clear %>  
+    <%end %>
+
+    <%= f.password_field :password, placeholder: "Passwort" %>
+    <%if e[:password].present? %>
+      <div class="error_msg"><%=e[:password].first%></div>
+    <% e.clear %>  
+    <%end %>
+
+    <%# tos must be accepted with String "true", not String "1" %>
+    <%= f.check_box :tos, {}, 'true' %>
+    <%if e[:tos].present? %>
+      <div class="error_msg center"><%=e[:tos].first%></div>
+    <%end %>
+    <% e.clear %>  
+    <%= f.label :tos do %>
+      Ich akzeptiere die 
+      <%= link_to "AGB", agb_url, target: "_blank" %>
+      und habe die 
+      <%= link_to "Datenschutzerklärung", datenschutzerklaerung_url, target: "_blank" %>
+      zur Kenntnis genommen.
+    <% end %>
+
+    <div><%= f.button "REGISTRIEREN" %></div>
+
+<% end %>
+
+  <div id="spacer"></div>
+  <center><span class="threesteps">➋ App wird installiert</span></center>
+  <div id="spacer"></div>
+  <center><span class="threesteps">➌ Link direkt in die App</span></center>
+  <div id="spacer"></div>
+  <p>&nbsp;</p>
+  <p>
+    <%= link_to "Impressum", impressum_url, target: "_blank" %> | 
+    <%= link_to "Blog", blog_url, target: "_blank" %>
+  </p>
