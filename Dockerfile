@@ -52,27 +52,38 @@ RUN apt-get update -qq && \
     apt-get install -y --force-yes  nodejs && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+# RUN git clone https://github.com/rbenv/rbenv.git ~/.rbenv
 # RUN git clone https://github.com/rbenv/rbenv.git ~/.rbenv && ~/.rbenv/bin/rbenv init
 # RUN git clone https://github.com/rbenv/ruby-build.git "$(~/.rbenv/bin/rbenv root)"/plugins/ruby-build && ~/.rbenv/bin/rbenv install $RUBY_VERSION && ~/.rbenv/bin/rbenv global $RUBY_VERSION
+# RUN ["/bin/bash", "-c", "~/.rbenv/bin/rbenv init && git clone https://github.com/rbenv/ruby-build.git \"$(~/.rbenv/bin/rbenv root)\"/plugins/ruby-build && ~/.rbenv/bin/rbenv install $RUBY_VERSION && ~/.rbenv/bin/rbenv global $RUBY_VERSION"]
 
-RUN ["/bin/bash", "-c", "~/.rbenv/bin/rbenv init && git clone https://github.com/rbenv/ruby-build.git \"$(~/.rbenv/bin/rbenv root)\"/plugins/ruby-build && ~/.rbenv/bin/rbenv install $RUBY_VERSION && ~/.rbenv/bin/rbenv global $RUBY_VERSION"]
+SHELL ["/bin/bash", "-c"]
+RUN git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+# RUN git clone https://github.com/rbenv/rbenv.git ~/.rbenv && ~/.rbenv/bin/rbenv init
+RUN ["/bin/bash", "-c", "~/.rbenv/bin/rbenv init"]
 
-# Set working directory
+RUN git clone https://github.com/rbenv/ruby-build.git /root/.rbenv/plugins/ruby-build
+
+# RUN git clone https://github.com/rbenv/ruby-build.git \"$(~/.rbenv/bin/rbenv root)\"/plugins/ruby-build
+RUN ~/.rbenv/bin/rbenv install $RUBY_VERSION && ~/.rbenv/bin/rbenv global $RUBY_VERSION
+# RUN ~/.rbenv/bin/rbenv global $RUBY_VERSION
+
+# # Set working directory
 WORKDIR $APP_HOME
-# Copy application code to the container
+# # Copy application code to the container
 COPY . .
 
-# # Install bundler and application gems
+# # # Install bundler and application gems
 RUN  ~/.rbenv/shims/gem install bundler -v $BUNDLER_VERSION && \
-    bundle install --binstubs --verbose --retry=3 --without='development test' && \
-    bundle exec rake assets:precompile
-# /bundle/bin/bundle config build.libv8 --with-cxx=clang++ && /bundle/bin/bundle update nokogiri && /bundle/bin/bundle install --binstubs --verbose --retry=3 --without='development test'
+    bundle install --binstubs --verbose --retry=3 --without='development test'
+
+# RUN bundle exec rake assets:precompile
+# # /bundle/bin/bundle config build.libv8 --with-cxx=clang++ && /bundle/bin/bundle update nokogiri && /bundle/bin/bundle install --binstubs --verbose --retry=3 --without='development test'
 
 
-#     # a writable tmp dir even in Lambda situation
-#     RUN ln -s /tmp /app/tmp
+# #     # a writable tmp dir even in Lambda situation
+# #     RUN ln -s /tmp /app/tmp
 
-EXPOSE 3000
+# EXPOSE 3000
 
-# CMD ["bundle","exec","puma","-C","config/puma.rb"]
+# # CMD ["bundle","exec","puma","-C","config/puma.rb"]
