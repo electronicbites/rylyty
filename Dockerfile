@@ -75,5 +75,6 @@ RUN /root/.rbenv/versions/2.1.10/bin/ruby /bundle/bin/rake assets:precompile
 RUN ln -s /tmp /app/tmp
 
 EXPOSE 3000
-# CMD ["bundle","exec","rails","server"]
-CMD ["tail", "-f", "/dev/null"]
+
+CMD ["/app/bin/rails","server"]
+# CMD ["tail", "-f", "/dev/null"]
