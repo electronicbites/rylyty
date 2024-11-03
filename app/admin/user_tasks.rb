@@ -23,7 +23,8 @@ ActiveAdmin.register UserTask do
     column :state
     column :verification_state
     column :photo do |user_task|
-      image_tag user_task.photo.url(:thumb)  if user_task.respond_to? 'photo'  
+      "Photo not available"
+#      image_tag user_task.photo.url(:thumb)  if user_task.respond_to? 'photo'
     end
     column :answer
     column :approval_state
@@ -45,7 +46,8 @@ ActiveAdmin.register UserTask do
         ad.user_game.game.title
       end
       row :photo do
-        image_tag(ad.photo.url(:thumb_hi))
+        "Photo not available"
+        # image_tag(ad.photo.url(:thumb_hi))
       end
       row :answer
       row :started_at
@@ -63,7 +65,7 @@ ActiveAdmin.register UserTask do
   end
 
   form do |f|
-      
+
     # f.inputs "Details" do
     #   #f.input :avatar, as: :file, hint: f.template.image_tag(f.object.avatar.url(:thumb)), input_html: {style: 'display: none;'}
     #   f.input :user
@@ -77,5 +79,5 @@ ActiveAdmin.register UserTask do
 
     f.buttons
   end
-  
+
 end

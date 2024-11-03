@@ -4,7 +4,8 @@ ActiveAdmin.register User do
 
   index do
     column :avatar do |user|
-      image_tag user.avatar.url(:thumb)    
+      "Photo not available"
+      # image_tag user.avatar.url(:thumb)
     end
     column :username
     column :email
@@ -18,7 +19,7 @@ ActiveAdmin.register User do
 
   form do |f|
     if !f.object.new_record?
-      
+
       f.inputs "Details" do
         f.input :avatar, as: :file, hint: f.template.image_tag(f.object.avatar.url(:thumb)), input_html: {style: 'display: none;'}
         f.input :username
@@ -34,5 +35,5 @@ ActiveAdmin.register User do
       f.buttons
     end
   end
-  
+
 end
