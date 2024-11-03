@@ -76,5 +76,5 @@ RUN ln -s /tmp /app/tmp
 
 EXPOSE 3000
 
-CMD ["/app/bin/rails","server"]
-# CMD ["tail", "-f", "/dev/null"]
+# CMD ["/app/bin/rails","server"]
+CMD ["tail", "-f", "/dev/null"]
