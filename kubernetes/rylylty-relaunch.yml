@@ -1,0 +1,266 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-config
+data:
+  POSTGRES_DB: rylyty
+  POSTGRES_USER: rylyty
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-config-file
+data:
+  postgresql.conf: |
+    max_connections = 100
+    shared_buffers = 256MB
+    log_statement = 'all'
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-volume-claim
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: postgres-secrets
+type: Opaque
+data:
+  POSTGRES_PASSWORD: cnlseXR5
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgres
+spec:
+  selector:
+    matchLabels:
+      name: postgres
+  serviceName: postgres
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: postgres
+    spec:
+      initContainers:
+        - name: postgres-init
+          image: postgres:12-alpine
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secrets
+                  key: POSTGRES_PASSWORD
+          envFrom:
+            - configMapRef:
+                name: postgres-config
+          command:
+            - bash
+            - "-c"
+            - |
+              set -ex
+              [[ `hostname` =~ -([0-9]+)$ ]] || exit 1
+              ordinal=${BASH_REMATCH[1]}
+              if [[ $ordinal -eq 0 ]]; then
+                printf "I am the primary"
+              else
+                printf "I am a read-only replica"
+              fi
+      containers:
+        - name: postgres
+          image: postgres:12-alpine
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secrets
+                  key: POSTGRES_PASSWORD
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: status.podIP
+          envFrom:
+            - configMapRef:
+                name: postgres-config
+          ports:
+            - name: postgres
+              containerPort: 5432
+          livenessProbe:
+            exec:
+              command:
+                - "sh"
+                - "-c"
+                - "pg_isready --host $POD_IP"
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            timeoutSeconds: 5
+          readinessProbe:
+            exec:
+              command:
+                - "sh"
+                - "-c"
+                - "pg_isready --host $POD_IP"
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            timeoutSeconds: 1
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/
+              name: postgres-storage
+      volumes:
+        - name: config-vol
+          configMap:
+            name: postgres-config-2
+            items:
+              - key: postgresql.conf
+                path: postgresql.conf
+        - name: postgres-storage
+          persistentVolumeClaim:
+            claimName: postgres-volume-claim
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+  labels:
+    name: postgres
+spec:
+  ports:
+    - port: 5432
+  selector:
+    name: postgres
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: rylyty-secrets
+type: Opaque
+data:
+  SECRET_KEY_BASE: UxIuc4wWZc4itEVTNEeRfHEt8d6xKaJ324JJH6Wbyf8ILhD1/SANNjTDxl4BKsa4
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rylyty-rails
+  labels:
+    name: rylyty-rails
+    app: rylyty
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: rylyty-rails
+  template:
+    metadata:
+      labels:
+        name: rylyty-rails
+    spec:
+      containers:
+        - name: rylyty-rails
+          image: registry.digitalocean.com/electronicbites/rylyty:latest
+          imagePullPolicy: Always
+          resources:
+            requests:
+              memory: "600Mi"
+              cpu: "0.2"
+            limits:
+              memory: "1.5Gi"
+              cpu: "0.4"
+          ports:
+            - containerPort: 4000
+              name: http-web-svc
+          env:
+            - name: SECRET_KEY_BASE
+              valueFrom:
+                secretKeyRef:
+                  name: rylyty-secrets
+                  key: SECRET_KEY_BASE
+          # livenessProbe:
+          #   httpGet:
+          #     path: /api/v1/healv
+          #     port: http-web-svc
+          #   initialDelaySeconds: 10
+          #   periodSeconds: 10
+          #   timeoutSeconds: 2
+          # readinessProbe:
+          #   httpGet:
+          #     path: /api/v1/healv
+          #     port: http-web-svc
+          #   initialDelaySeconds: 5
+          #   timeoutSeconds: 1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rylyty-rails
+spec:
+  type: ClusterIP
+  selector:
+    name: rylyty-rails
+  ports:
+    - port: 80
+      targetPort: http-web-svc
+      protocol: TCP
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-prod
+  namespace: cert-manager
+spec:
+  acme:
+    # The ACME server URL
+    # staging does not work well with ember
+    # server: https://acme-staging-v02.api.letsencrypt.org/directory
+    server: https://acme-v02.api.letsencrypt.org/directory
+    # server: https://acme-staging-v02.api.letsencrypt.org/directory
+    # Email address used for ACME registration
+    email: electronicbites@gmail.com
+    # Name of a secret used to store the ACME account private key
+    privateKeySecretRef:
+      name: letsencrypt-prod
+    # Enable the HTTP-01 challenge provider
+    solvers:
+      - http01:
+          ingress:
+            class: nginx
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: rylyty-ingress
+  annotations:
+    spec.ingressClassName: nginx
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.org/server-snippets: |
+      proxy_intercept_errors on;
+      error_page 404 "/";
+spec:
+  ingressClassName: nginx
+  tls: # < placing a host in the TLS config will indicate a certificate should be created
+    - hosts:
+        - rylyty.electronicbites.com
+      # This secret must exist beforehand
+      # The cert must also contain the subj-name foo.bar.com
+      # https://github.com/kubernetes/ingress-nginx/blob/main/docs/examples/PREREQUISITES.md#tls-certificates
+      secretName: rylyty-production-tls # < cert-manager will store the created certificate in this secret.
+  rules:
+    - host: "rylyty.electronicbites.com"
+      http:
+        paths:
+          - path: "/"
+            pathType: Prefix
+            backend:
+              service:
+                name: rylyty-rails
+                port:
+                  number: 80
