@@ -68,7 +68,7 @@ COPY . .
 RUN  ~/.rbenv/shims/gem install bundler -v $BUNDLER_VERSION && \
     bundle install --binstubs --verbose --retry=3 --without='development test'
 
-RUN bundle exec rake assets:precompile
+RUN /root/.rbenv/versions/2.1.10/bin/ruby /bundle/bin/rake assets:precompile
 
 
 # a writable tmp dir even in Lambda situation
