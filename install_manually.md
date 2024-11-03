@@ -118,3 +118,9 @@ k port-forward $(k get pod --selector="name=postgres" --output jsonpath='{.items
 
 pg_restore --verbose --clean --no-acl --no-owner -h localhost -U rylyty -d rylyty -p 8080 ~/Documents/_work/rylyty/docs/170113.dump
 ```
+
+https://rylyty.electronicbites.com/cockpit/
+
+https://209.38.184.229/cockpit/
+
+https://rylyty.electronicbites.com/cockpit/

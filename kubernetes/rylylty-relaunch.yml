@@ -175,7 +175,7 @@ spec:
               memory: "1.5Gi"
               cpu: "0.4"
           ports:
-            - containerPort: 4000
+            - containerPort: 3000
               name: http-web-svc
           env:
             - name: SECRET_KEY_BASE
