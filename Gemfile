@@ -25,6 +25,7 @@ gem 'resque-scheduler', require: 'resque_scheduler'
 gem 'resque_mailer'
 gem 'state_machine'
 gem 'unicorn'
+gem 'rb-readline'
 
 # Gems used only for assets and not required
 # in production environments by default.
