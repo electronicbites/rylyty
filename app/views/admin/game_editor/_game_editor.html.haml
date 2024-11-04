@@ -54,12 +54,14 @@
 
       = f.label :image, t(:image)
       - if @game.image.present?
-        = image_tag @game.image.url(:normal_hi) rescue ""
+        "Photo not available"
+        = # image_tag @game.image.url(:normal_hi) rescue ""
       = f.file_field :image
 
       = f.label :icon, t(:icon)
       - if @game.icon.present?
-        = image_tag @game.icon.url(:normal_hi) rescue ""
+        "Icon not available"
+        = # image_tag @game.icon.url(:normal_hi) rescue ""
       = f.file_field :icon
 
     .span6

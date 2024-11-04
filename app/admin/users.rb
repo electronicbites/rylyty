@@ -21,7 +21,7 @@ ActiveAdmin.register User do
     if !f.object.new_record?
 
       f.inputs "Details" do
-        f.input :avatar, as: :file, hint: f.template.image_tag(f.object.avatar.url(:thumb)), input_html: {style: 'display: none;'}
+        # f.input :avatar, as: :file, hint: f.template.image_tag(f.object.avatar.url(:thumb)), input_html: {style: 'display: none;'}
         f.input :username
         f.input :email
         f.input :birthday

@@ -1,5 +1,5 @@
 %p
-- unless  @task.new_record? 
+- unless  @task.new_record?
   %b
     =link_to "zurück zu: #{@task.game.title}", "#{edit_cockpit_game_editor_path(id: @game.id)}"
 - if @task.errors.any?
@@ -18,13 +18,13 @@
     = form_for(@task, url: cockpit_game_editor_path(id: @game.id), multipart: true) do |f|
       .span5
         %input{:name => "_method", :type => "hidden", :value => "put"}
-        
+
         - unless  @task.id.nil?
           %input{:name => "task_id", :type => "hidden", :value => @task.id}
           %input#task_type{:name => "task_type", :type => "hidden", :value => "#{@task.type.tableize.singularize}"}
-        
+
         %input{:name => "tasks", :type => "hidden", :value => "true"}
-        
+
         %div{:style => "float:left; height: 100%;"}
           = f.label :title, t(:title)
           = f.text_field :title, class: "span5", placeholder: "max. 40 Zeichen"
@@ -34,9 +34,10 @@
           = f.text_area :description, rows: 10, class: "span5"
           = f.label :image, t(:image)
           - if @task.icon.present?
-            = image_tag @task.icon.url(:thumb_hi)
+            "Photo not available"
+            = # image_tag @task.icon.url(:thumb_hi)
           = f.file_field :icon
-      
+
       .span5
         = label_tag :type, t(:type)
         - if @task.id.nil?
@@ -96,4 +97,3 @@
         = check_box_tag "multiple_choice_task[questions][:parent_id][option][:index][check]", 1
         = text_field_tag "multiple_choice_task[questions][:parent_id][option][:index][answer]", '', size: 20, class: 'answer_input_width'
         = link_to t(:delete), cockpit_game_editor_path(id: @game.id, tasks: true, task_id: @task.id, _action: :del_mc_a).concat('&q_idx=:parent_id&a_idx=:index'), 'data-method' => :put, remote: true, id: "del_q_:parent_id_a_:index", class: "btn btn-danger", style: 'margin-bottom: 9px'
-      
